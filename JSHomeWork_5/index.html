@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1. Написать функцию возведения числа в степень
+        function exponentiation(num, extent) {
+            if(extent == 1) return num;
+            return num * exponentiation(num, --extent);
+        }
+        let digit = +prompt("Введите число для возведения в степень");
+        let power = +prompt("Введите степень, в которую нужно возвести");
+        alert(`${digit}^${power} = ${exponentiation(digit,power)}`);
+
+        //2. Написать функцию поиска наибольшего общего делителя.
+        function NOD(digit1, digit2) {
+            if(digit1 == 0 || digit2 == 0) return (digit1 + digit2);
+            if(digit1 > digit2) return NOD(digit1 %=digit2,digit2);
+            return NOD(digit1,digit2 %= digit1);
+        }
+        let num1 = +prompt("Введите первое число");
+        let num2 = +prompt("Введите второе число");
+        alert(`НОД(${num1},${num2}) = ${NOD(num1,num2)}`);
+
+        //3. Написать функцию для поиска максимальной цифры в числе.
+        function maxNumeric(number, index = 0, max = 0) {
+            let tmpMax = max;
+            if(number.length == index) return tmpMax;
+            if(number[index] > tmpMax) {
+                tmpMax = number[index];
+                return maxNumeric(number,++index,tmpMax);
+            }
+            return maxNumeric(number,++index,tmpMax);
+        }
+        let maxDigit = prompt("Введите число");
+        alert(`Максимальная цифра в числе ${maxDigit} = ${maxNumeric(maxDigit)}`);
+
+        //4. Написать функцию, которая определяет простое ли переданное число.
+        function simpleDigit(number, index = 2, flag = true) {
+            if (number == 2) return flag;
+            if (!(number % 2)) {
+                return flag = false;
+            }
+            let tmp = Math.sqrt(number);
+            if (index <= tmp) {
+                if (!(number % index)) return flag = false;
+                return simpleDigit(number, ++index, flag);
+            }
+            return flag;
+        }
+        let simpleNumeric = +prompt("Введите число для проверки");
+        (simpleDigit(simpleNumeric)) ? alert(`Число ${simpleNumeric} - Простое`) : alert(`Число ${simpleNumeric} - Составное`);
+
+        /*5. Написать функцию для вывода всех множителей переданного числа в возрастающем порядке.
+        Например: число 18 – множители 2 * 3 * 3.*/
+        function allFactors(number1, div, factors) {
+            if(number1 == 1) {
+                return factors;
+            }
+            if(number1 % div == 0){
+                factors.push(div);
+                return allFactors(number1 / div, div, factors);
+            }
+            else {
+                return allFactors(number1, ++div, factors);
+            }
+        }
+        let array = [];
+        let factorDigit = +prompt("Введите число для разложения на множители ");
+        alert(`${factorDigit} = ${allFactors(factorDigit,2,array)}`);
+
+        /*Написать функцию, которая возвращает число Фибоначчи
+        по переданному порядковому номеру.
+        Числа Фибоначчи: 1, 1, 2, 3, 5, 8, 13… Ряд основывается на
+        том, что каждое число равно сумме двух предыдущих чисел.
+        Например: порядковый номер 3 – число 2, порядковый
+        номер 6 – число 8.*/
+        function fibonacci(n) {
+            return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        let digitFib = +prompt("Введите порядковый номер числа Фибоначчи");
+        alert(`Порядковый номер ${digitFib} - число ${fibonacci(digitFib)}`);
+
+    </script>
+</body>
+
+</html>

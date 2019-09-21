@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*1. Написать функцию, которая принимает строку и выводит
+        статистику о ней: количество букв, количество цифр и
+        количество других знаков.*/
+        function staticticString(string) {
+            let digitCount = (string.match(/\d/g) == null) ? 0 : string.match(/\d/g).length;
+            let letterCount =(string.match(/[a-zA-Z]|[а-яА-Я]/g) == null) ? 0 : string.match(/[a-zA-Z]|[а-яА-Я]/g).length;
+            let otherSighCount = string.length - (digitCount + letterCount);
+            alert(`Кол-во букв =  ${letterCount}  Кол-во цифр =  ${digitCount}  Кол-во других символов = ${otherSighCount}`);
+        }
+        let string = prompt("Введите строку");
+        staticticString(string);
+
+        /*2. Написать функцию, которая принимает двузначное число
+        и возвращает его в текстовом виде.
+        Например: 35 – тридцать пять, 89 – восемьдесят девять,
+        12 – двенадцать. */
+        function digitInText(number) {
+            let outputText;
+            let graduation = ["надцать", "дцать", "сорок", "десят", "носто"];
+            let digit = ["один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять"];
+            let digit1 = number[0];
+            let digit2 = number[1];
+            if (digit1 == 1) {
+                switch (digit2) {
+                    case '1':
+                        outputText = digit[0] + graduation[0];
+                        break;
+                    case '2':
+                        outputText = digit[1].replace('а', 'е') + graduation[0];
+                        break;
+                    case '3':
+                        outputText = digit[2] + graduation[0];
+                        break;
+                    case '4':
+                        outputText = digit[3].replace('ре', 'р') + graduation[0];
+                        break;
+                    case '5':
+                        outputText = digit[4].replace('ь', '') + graduation[0];
+                        break;
+                    case '6':
+                        outputText = digit[5].replace('ь', '') + graduation[0];
+                        break;
+                    case '7':
+                        outputText = digit[6].replace('ь', '') + graduation[0];
+                        break;
+                    case '8':
+                        outputText = digit[7].replace('ь', '') + graduation[0];
+                        break;
+                    case '9':
+                        outputText = digit[8].replace('ь', '') + graduation[0];
+                        break;
+                    case '0':
+                        outputText = digit[9];
+                        break;
+                }
+            }
+            else if (digit1 == 2 || digit1 == 3) {
+                switch (digit2) {
+                    case '1':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[0];
+                        else outputText = digit[2] + graduation[1] + " " + digit[0];
+                        break;
+                    case '2':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[1];
+                        else outputText = digit[2] + graduation[1] + " " + digit[1];
+                        break;
+                    case '3':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[2];
+                        else outputText = digit[2] + graduation[1] + " " + digit[2];
+                        break;
+                    case '4':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[3];
+                        else outputText = digit[2] + graduation[1] + " " + digit[3];
+                        break;
+                    case '5':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[4];
+                        else outputText = digit[2] + graduation[1] + " " + digit[4];
+                        break;
+                    case '6':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[5];
+                        else outputText = digit[2] + graduation[1] + " " + digit[5];
+                        break;
+                    case '7':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[6];
+                        else outputText = digit[2] + graduation[1] + " " + digit[6];
+                        break;
+                    case '8':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[7];
+                        else outputText = digit[2] + graduation[1] + " " + digit[7];
+                        break;
+                    case '9':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1] + " " + digit[8];
+                        else outputText = digit[2] + graduation[1] + " " + digit[8];
+                        break;
+                    case '0':
+                        if (digit1 == 2) outputText = digit[1] + graduation[1];
+                        else outputText = digit[2] + graduation[1];
+                        break;
+                }
+            }
+            else if (digit1 == 4) {
+                switch (digit2) {
+                    case '1':
+                        outputText = graduation[2] + " " + digit[0];
+                        break;
+                    case '2':
+                        outputText = graduation[2] + " " + digit[1];
+                        break;
+                    case '3':
+                        outputText = graduation[2] + " " + digit[2];
+                        break;
+                    case '4':
+                        outputText = graduation[2] + " " + digit[3];
+                        break;
+                    case '5':
+                        outputText = graduation[2] + " " + digit[4];
+                        break;
+                    case '6':
+                        outputText = graduation[2] + " " + digit[5];
+                        break;
+                    case '7':
+                        outputText = graduation[2] + " " + digit[6];
+                        break;
+                    case '8':
+                        outputText = graduation[2] + " " + digit[7];
+                        break;
+                    case '9':
+                        outputText = graduation[2] + " " + digit[8];
+                        break;
+                    case '0':
+                        outputText = graduation[2];
+                        break;
+                }
+
+            }
+            else if (digit1 == 5 || digit1 == 6 || digit1 == 7 || digit1 == 8) {
+                switch (digit2) {
+                    case '1':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[0];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[0];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[0];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[0];
+                        break;
+                    case '2':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[1];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[1];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[1];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[1];
+                        break;
+                    case '3':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[2];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[2];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[2];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[2];
+                        break;
+                    case '4':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[3];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[3];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[3];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[3];
+                        break;
+                    case '5':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[4];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[4];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[4];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[4];
+                        break;
+                    case '6':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[5];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[5];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[5];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[5];
+                        break;
+                    case '7':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[6];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[6];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[6];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[6];
+                        break;
+                    case '8':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[7];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[7];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[7];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[7];
+                        break;
+                    case '9':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3] + " " + digit[8];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3] + " " + digit[8];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3] + " " + digit[8];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3] + " " + digit[8];
+                        break;
+                    case '0':
+                        if (digit1 == 5) outputText = digit[4] + graduation[3];
+                        if (digit1 == 6) outputText = digit[5] + graduation[3];
+                        if (digit1 == 7) outputText = digit[6] + graduation[3];
+                        if (digit1 == 8) outputText = digit[7] + graduation[3];
+                        break;
+                }
+            }
+            if (digit1 == 9) {
+                let tmp = digit[8].replace('ть', '') + graduation[4];
+                switch (digit2) {
+                    case '1':
+                        outputText = tmp + " " + digit[0];
+                        break;
+                    case '2':
+                        outputText = tmp + " " + digit[1];
+                        break;
+                    case '3':
+                        outputText = tmp + " " + digit[2];
+                        break;
+                    case '4':
+                        outputText = tmp + " " + digit[3];
+                        break;
+                    case '5':
+                        outputText = tmp + " " + digit[4];
+                        break;
+                    case '6':
+                        outputText = tmp + " " + digit[5];
+                        break;
+                    case '7':
+                        outputText = tmp + " " + digit[6];
+                        break;
+                    case '8':
+                        outputText = tmp + " " + digit[7];
+                        break;
+                    case '9':
+                        outputText = tmp + " " + digit[8];
+                        break;
+                    case '0':
+                        outputText = tmp;
+                        break;
+                }
+            }
+            alert(`${number} = ${outputText}`);
+        }
+        let chislo = prompt("Введите двузначное число");
+        digitInText(chislo);
+
+
+
+        /*3. Написать функцию, которая заменяет в полученной строке
+        большие буквы на маленькие, маленькие – на большие, а
+        цифры – на знак нижнего подчеркивания. */
+        function characterReplacement(string) {
+            let newString = "";
+            for(let i = 0; i < string.length; ++i) {
+                if(string[i].search(/[a-zа-я]/) != -1) {
+                    newString += string[i].toUpperCase();
+                }
+                else if(string[i].search(/[A-ZА-Я]/) != -1) {
+                    newString += string[i].toLowerCase();
+                }
+                else if(string[i].search(/\d/) != -1) {
+                    newString += '_';
+                }
+                else {
+                    newString += string[i];
+                }
+            }
+            alert(newString);
+        }
+        let changeString = prompt("Введите строку:")
+        characterReplacement(changeString);
+
+        /*4. Написать функцию, которая преобразует названия cssстилей с дефисом в название в СamelСase стиле: font-size
+    в fontSize, background-color в backgroundColor, textalign в textAlign.*/
+        function camelCase(string) {
+            let arrString = string.split('-');
+            let camelCaseString = "";
+            for(let i = 0; i < arrString.length; ++i) {
+                if(!i) {
+                    camelCaseString += arrString[i];
+                }
+                else {
+                    camelCaseString += arrString[i].replace(arrString[i][0],arrString[i][0].toUpperCase());
+                }
+            }
+            alert(camelCaseString);
+        }
+        let camelString = prompt("Введите строку с дефисом");
+        camelCase(camelString);
+    
+        /*5. Написать функцию, которая принимает словосочетание и превращает его в аббревиатуру.
+        Например: cascading style sheets в CSS, объектноориентированное программирование в ООП. */
+        function phraseInAbbreviation (phraseString) {
+            let abbreviation = phraseString.split(/\s+/g);
+            let abbreviationString = "";
+            for(let i = 0; i < abbreviation.length; ++i) {
+                abbreviationString += abbreviation[i][0].toUpperCase();
+            }
+            alert(`${phraseString} - ${abbreviationString}`);
+        }
+        phraseInAbbreviation("cascading style sheet");
+    
+        /*6. Написать функцию, которая принимает любое количество строк, объединяет их в одну длинную строку и возвращает ее. */
+        function totalString () {
+            let totalString = "";
+            for(let i = 0; i < arguments.length; ++i) {
+                totalString += arguments[i];
+            }
+            alert(totalString.replace("null",""));
+        }
+        let answer;
+        let arrString = [];
+        do {
+            answer = prompt("Введите строку (для выхода в сплывающем окне нажмите Отмена):");
+            arrString.push(answer);
+        }while(answer != undefined);
+        totalString(...arrString);
+    
+        /*7. Написать функцию – калькулятор. Функция принимает
+        строку с примером, определяет, какое действие необходимо
+        выполнить (+ - * /), переводит операнды в числа, решает
+        пример и возвращает результат.*/
+        function simpleCalculate(calculateString) {
+            let sign = calculateString[calculateString.search(/[-/*+]/)];
+            let operands = calculateString.split(/[-+/*]/);
+            let operand1 = +operands[0];
+            let operand2 = +operands[1];
+            let total = 0;
+            switch(sign) {
+                case '-':
+                total = operand1 - operand2;
+                break;
+                case '+':
+                total = operand1 + operand2;
+                break;
+                case '/':
+                total = operand1 / operand2;
+                break;
+                case '*':
+                total = operand1 * operand2;
+                break;
+                default:
+                alert("Такого действия не существует");
+            }
+            alert(`${calculateString}=${total}`);
+        }
+        let example = prompt("Введите строку с выражением(например: 5+10)","5+10");
+        simpleCalculate(example);
+    
+        /*8. Написать функцию, которая получает url и выводит подробную информацию о нем.
+        Например: url “https://itstep.org/ua/about”, информация
+        “протокол: https, домен: itstep.org, путь: /ua/about”.*/
+        function getPath(arr) {
+            let newArr = [""];
+            for(let i = 2;i < arr.length; ++i) {
+                newArr.push(arr[i]);
+            }
+            return newArr.join('/');
+        }
+        function urlInfo(urlString) {
+            let arrUrl = urlString.split(/[:]*[/]+/);
+            (arrUrl.length == 2) ? alert(`Протокол: ${arrUrl[0]}, домен: ${arrUrl[1]}`):alert(`Протокол: ${arrUrl[0]}, домен: ${arrUrl[1]}, путь - ${getPath(arrUrl)}`);
+            //alert(arrUrl);
+        }
+        urlInfo("https://itstep.org/ua/about");
+    
+        /*9. Написать функцию, которая принимает строку и разделитель и возвращает массив подстрок, разбитых с помощью указанного разделителя.
+        Например: строка “10/08/2020”, разделитель “/”, результат: “10”, “08”, “2020”. Выполняя задание, не используйте функцию split().*/
+        function mySplit(string, separator) {
+            let arr = [];
+            let key = 0;
+            for(let i = 0; i < string.length; ++i) {
+                if(string[i] == separator) {
+                    arr.push(`"${string.slice(key,i)}"`);
+                    key=++i;
+                }
+            }
+            arr.push(`"${string.slice(key,string.length)}"`);
+            alert(arr);
+        }
+        mySplit("10/08/2020",'/');
+    
+        /*10. Написать функцию вывода текста по заданному шаблону.
+        Функция принимает первым параметром шаблон, в тексте которого может использоваться %, после символа % указывается индекс входного параметра. При выводе вместо
+        %индекс необходимо вывести значение соответствующего входного параметра.
+        Например: print(“Today is %1 %2.%3.%4”, “Monday”, 10, 8, 2020) должна вывести “Today is Monday 10.8.2020”.*/
+        function templateTextOutput() {
+            let maxIndex = arguments[0].match(/\d/g);
+            if(Math.max(...maxIndex) > arguments.length || maxIndex.length > arguments.length) {
+                alert("Неверно переданные данные");
+            }
+            else {
+                let tmpString = arguments[0];
+                for(let i = 0; i < maxIndex.length; ++i) {
+                    tmpString = tmpString.replace(`%${maxIndex[i]}`,arguments[maxIndex[i]]);
+                }
+                alert(tmpString);
+            }
+        }
+        templateTextOutput("Today is %1 %2.%3.%4", "Monday", 10, 8, 2020);
+    </script>
+</body>
+
+</html>

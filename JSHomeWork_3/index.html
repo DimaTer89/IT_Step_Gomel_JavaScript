@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1. Подсчитать сумму всех чисел в заданном пользователем диапазоне. 
+        let begin = +prompt("Введите число для начала диапазона");
+        let end = +prompt("Введите число для конца диапазона");
+        let tmp = begin;
+        let sum = 0;
+        while (++tmp < end) {
+            sum += tmp;
+        }
+        alert(`Сумма в диапоазоне от ${begin} до ${end}  = ${sum}`);
+
+        //2. Запросить 2 числа и найти только наибольший общий делитель.
+        let oneDigit = +prompt("Введите первое число");
+        let twoDigit = +prompt("Введите второе число");
+        let one = oneDigit;
+        let two = twoDigit;
+        while(one != 0 && two != 0){
+            if(one > two) {
+                one = one % two;
+            }
+            else {
+                two = two % one;
+            }
+        }
+        alert(`НОД(${oneDigit},${twoDigit}) = ${one + two}`);
+
+        //3. Запросить у пользователя число и вывести все делители этого числа.
+        let digit = +prompt("Введите число");
+        let tmpDigit = digit;
+        let del = [];
+        while(tmpDigit > 0){
+            if(digit % tmpDigit == 0){
+                del.push(tmpDigit );
+            }
+            --tmpDigit;            
+        }
+        alert(`Делители числа ${digit} : ${del.reverse()}`);
+
+        // 4. Определить количество цифр в введенном числе
+        let chislo = prompt("Введите произвольное число");
+        let count = 0;
+        for (let i = 0; i < chislo.length; ++i){
+            count++;
+        }
+        alert(`В ${chislo} ${count} цифр`);
+
+        /*5. Запросить у пользователя 10 чисел и подсчитать, сколько
+        он ввел положительных, отрицательных и нулей. При этом
+        также посчитать, сколько четных и нечетных. Вывести
+        статистику на экран. Учтите, что достаточно одной переменной (не 10) для ввода чисел пользователем.*/
+        let countPlus = 0;
+        let countMinus = 0;
+        let countZero = 0;
+        let enterNumber;
+        for(let i = 0; i < 10; ++i) {
+            enterNumber = +prompt(`Введите ${i + 1} число`);
+            if(enterNumber > 0) {
+                countPlus++;
+                continue;
+            }
+            else if(enterNumber < 0) {
+                countMinus++;
+                continue;
+            }
+            else {
+                countZero++;
+            }
+        }
+        alert(`Положительных чисел - ${countPlus}, Отрицательных - ${countMinus}, Равных нулю - ${countZero}`);
+
+        /*6. Зациклить калькулятор. Запросить у пользователя 2 числа
+        и знак, решить пример, вывести результат и спросить, хочет ли он решить еще один пример. И так до тех пор, пока
+        пользователь не откажется.*/
+        let oneNumber;
+        let twoNumber;
+        let numberAnswer;
+        let mark;
+        let answer;
+        do {
+            oneNumber = +prompt("Введите первое число");
+            twoNumber = +prompt("Введите второе число");
+            mark = prompt("Введите знак операции\n1.+\n2.-\n3.*\n4./");
+            switch(mark){
+                case '1':
+                case '+':
+                    numberAnswer = oneNumber + twoNumber;
+                    break;
+                case '2': 
+                case '-': 
+                    numberAnswer = oneNumber - twoNumber;
+                    break;
+                case '3': 
+                case '*':
+                    numberAnswer = oneNumber * twoNumber;
+                    break;
+                case '4':
+                case '/': 
+                    numberAnswer = oneNumber / twoNumber;
+                    break;
+                default:
+                    alert("Неверные данные");
+                    break;       
+            }
+            answer = prompt(`${oneNumber}${mark}${twoNumber} = ${numberAnswer}\nПовторить\n1.Да\n2.Нет`)
+
+        }while(answer == "Да" || answer == "1");
+        /*7. Запросить у пользователя число и на сколько цифр его
+        сдвинуть. Сдвинуть цифры числа и вывести результат (если
+        число 123456 сдвинуть на 2 цифры, то получится 345612).*/
+        let stringNumber="";
+        let tmpNumber = prompt("Введите произвольное число");
+        let step = +prompt("Сколько цифр сдвинуть");
+        let numberArr = [];
+        if(tmpNumber.length < step) {
+            alert("Сдвигаемых цифр больше чем цифр в числе");
+        }
+        else {
+            
+            for(let i = 0; i < tmpNumber.length; ++i) {
+            numberArr.push(tmpNumber[i]);
+            }
+            for (let i = 0; i < step; ++i){
+                for (let j = 0;j < numberArr.length - 1; j++) {
+                    let tmp = numberArr[j];
+                    numberArr[j] = numberArr[j + 1];
+                    numberArr[j + 1] = tmp;
+                }
+            }
+            for(let i = 0;i < numberArr.length; ++i) {
+                stringNumber += numberArr[i];
+            }
+        }
+        alert(`Введённое число - ${tmpNumber}, Кол-во сдвигов - ${step}, Полученное число - ${stringNumber}`);
+
+        /* 8.Зациклить вывод дней недели таким образом: «День недели.
+        Хотите увидеть следующий день?» и так до тех пор, пока
+        пользователь нажимает OK. */
+        let i = 0;
+        let reply;
+        let weekArr = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+        do {
+            reply = prompt(`Сегодня ${weekArr[i]}. Показать следующий день\n1.yes\n2.no`);
+            i++;
+            if(i > 6) {
+                i = 0;
+            }
+        }while(reply == "yes" || reply == "1");
+        /*9. Вывести таблицу умножения для всех чисел от 2 до 9.
+        Каждое число необходимо умножить на числа от 1 до 10.*/
+        let multiTable = new Array();
+        let k = 2;
+        let l = 1;
+        let index = 0;
+        for(let i = 0; i < 8; ++i) {
+            multiTable[i]=new Array();
+            for( let j = 0; j < 10; ++j){
+                if(index == 4) {
+                    multiTable[i][j] = (`${k} * ${l} = ${k * l}\n`);
+                    index = 0;
+                }
+                else {
+                    multiTable[i][j] = (`${k} * ${l} = ${k * l}`);
+                }
+                ++l;
+                ++index;
+            }
+            ++k;
+            l = 1;
+        }
+        alert(`${multiTable}`);
+        /*10. Игра «Угадай число». Предложить пользователю загадать
+        число от 0 до 100 и отгадать его следующим способом:
+        каждую итерацию цикла делите диапазон чисел пополам,
+        записываете результат в N и спрашиваете у пользователя
+        «Ваше число > N, < N или == N?». В зависимости от того
+        что указал пользователь, уменьшаете диапазон. Начальный
+        диапазон от 0 до 100, поделили пополам и получили 50.
+        Если пользователь указал, что его число > 50, то изменили
+        диапазон на от 51 до 100. И так до тех пор, пока пользователь не выберет == N.*/
+        let beginDiaposon = 0;
+        let endDiaposon = 100;
+        let middleNumber = Math.round((beginDiaposon + endDiaposon) / 2);
+        let digitAnswer;
+        alert("Загадайте число от 0 до 100, и я попробую его отгадать");
+        do {
+            digitAnswer = prompt(`Ваше число\n1.>${middleNumber}\n2.<${middleNumber}\n3.==${middleNumber}`);
+            switch(digitAnswer) {
+                case "1":
+                case ">":
+                beginDiaposon = ++middleNumber;
+                endDiaposon = Math.round((beginDiaposon + endDiaposon) / 2);
+                middleNumber = Math.round((beginDiaposon + endDiaposon) / 2);
+                break;
+                case "2":
+                case "<":
+                beginDiaposon = 0;
+                endDiaposon = Math.round((beginDiaposon + endDiaposon) / 2);
+                middleNumber = Math.round((beginDiaposon + endDiaposon) / 2);
+                break;
+                case "3":
+                case "==":
+                break;
+            }
+        }while(digitAnswer == "1" || digitAnswer == ">" || digitAnswer == "2" || digitAnswer == "<");
+        alert(`Ваше число - ${middleNumber}`);
+    </script>
+</body>
+
+</html>

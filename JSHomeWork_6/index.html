@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*  Задание 1
+        Создать объект, описывающий автомобиль (производитель,модель, год выпуска, средняя скорость), и следующие функции для работы с этим объектом.
+            1. Функция для вывода на экран информации об автомобиле.
+            2. Функция для подсчета необходимого времени для преодоления переданного расстояния со средней скоростью.
+            Учтите, что через каждые 4 часа дороги водителю необходимо делать перерыв на 1 час.*/
+        let car = {
+            model: "Audi",
+            year: 2010,
+            middleSpeed: 120,
+            info: function() {
+                alert(`Модел - ${this.model}\nГод выпуска - ${this.year} год\nСредняя скорость - ${this.middleSpeed} км/час`);
+            },
+            travelTime: function (distance) {
+                alert(`На преодоление ${distance} км. вам понадобится - ${(distance / this.middleSpeed + Math.floor((distance / this.middleSpeed)/4)).toFixed(2)} часа`);
+            }
+        }
+        let answer;
+        let spacing;
+        do {
+            answer = prompt("задание 1\nВыберите пункт меню\n1.Показать информацию об автомобиле\n2.Рассчитать время прохождения пути\n3.Выход");
+            switch(answer) {
+                case '1':
+                car.info();
+                break;
+                case '2':
+                spacing = +prompt("Введите нужное расстояние");
+                car.travelTime(spacing);
+                break;
+                default:
+                alert("До свидания!");
+                break;
+            }
+        }while(answer <= '2');
+
+        /*   Задание 2
+        Создать объект, хранящий в себе отдельно числитель и знаменатель дроби, и следующие функции для работы с этим объектом.
+            1. Функция сложения 2-х объектов-дробей.
+            2. Функция вычитания 2-х объектов-дробей.
+            3. Функция умножения 2-х объектов-дробей.
+            4. Функция деления 2-х объектов-дробей.
+            5. Функция сокращения объекта-дроби.*/
+        function NOZ(num1, num2) {
+            let max = tmpMax = (num1 > num2) ? num1 : num2;
+            if ((max % num1 == 0) && (max % num2 == 0)) {
+                return max;
+            }
+            else {
+                for (let i = 2; ; ++i) {
+                    max *= i;
+                    if ((max % num1 == 0) && (max % num2 == 0)) {
+                        return max;
+                    }
+                    max = tmpMax;
+                }
+            }
+        }
+        function NOD(digit1, digit2) {
+            if (digit1 == 0 || digit2 == 0) return (digit1 + digit2);
+            if (digit1 > digit2) return NOD(digit1 %= digit2, digit2);
+            return NOD(digit1, digit2 %= digit1);
+        }
+        function getFraction(n) {
+            let numeratorFraction;
+            let denominatorFraction;
+            numeratorFraction = +prompt(`Введите числитель ${n} дроби`);
+            denominatorFraction = +prompt(`Введите знаменатель ${n} дроби`);
+            return new Fraction(numeratorFraction, denominatorFraction);
+        }
+        function getResult(obj1, obj2, obj3, sign){
+            alert(`${obj1.numerator}/${obj1.denominator} ${sign} ${obj2.numerator}/${obj2.denominator} = ${obj3.numerator}/${obj3.denominator}`);
+        }
+        function Fraction(numerator, denominator = 1) {
+            this.numerator = numerator,
+                this.denominator = denominator,
+                this.plus = function (objFraction) {
+                    let littleDenominator = NOZ(this.denominator, objFraction.denominator);
+                    let tmpNumerator = (this.numerator * (littleDenominator / this.denominator)) + (objFraction.numerator * (littleDenominator / objFraction.denominator));
+                    let tmpDenominator = littleDenominator
+                    return new Fraction(tmpNumerator, tmpDenominator);
+                }
+            this.minus = function (objFraction) {
+                let littleDenominator = NOZ(this.denominator, objFraction.denominator);
+                let tmpNumerator = (this.numerator * (littleDenominator / this.denominator)) - (objFraction.numerator * (littleDenominator / objFraction.denominator));
+                let tmpDenominator = littleDenominator
+                return new Fraction(tmpNumerator, tmpDenominator);
+            }
+            this.multiply = function (objFraction) {
+                let tmpNumerator = this.numerator * objFraction.numerator;
+                let tmpDenominator = this.denominator * objFraction.denominator;
+                return new Fraction(tmpNumerator, tmpDenominator);
+            }
+            this.ratio = function (objFraction) {
+                let tmpNumerator = this.numerator * objFraction.denominator;
+                let tmpDenominator = this.denominator * objFraction.numerator;
+                return new Fraction(tmpNumerator, tmpDenominator);
+            }
+            this.fractionReduction = function () {
+                let nod = NOD(this.numerator, this.denominator);
+                this.numerator /= nod;
+                this.denominator /= nod;
+            }
+        }
+        let fractionAnswer;
+        let fraction1;
+        let fraction2;
+        let resultFraction;
+        do {
+            fractionAnswer = prompt("Задание 2\nВыберите действие с дробями\n1.Сложение\n2.Вычитание\n3.Умножение\n4.Деление\n5.Выход");
+            if (fractionAnswer <= 4 ) {
+                fraction1 = getFraction(1);
+                fraction2 = getFraction(2);
+            }
+            switch (fractionAnswer) {
+                case '1':
+                    resultFraction = fraction1.plus(fraction2);
+                    resultFraction.fractionReduction();
+                    getResult(fraction1, fraction2, resultFraction,'+');
+                    break;
+                case '2':
+                    resultFraction = fraction1.minus(fraction2);
+                    resultFraction.fractionReduction();
+                    getResult(fraction1, fraction2, resultFraction,'-');
+                    break;
+                case '3':
+                    resultFraction = fraction1.multiply(fraction2);
+                    resultFraction.fractionReduction();
+                    getResult(fraction1, fraction2, resultFraction,'*');
+                    break;
+                case '4':
+                    resultFraction = fraction1.ratio(fraction2);
+                    resultFraction.fractionReduction();
+                    getResult(fraction1, fraction2, resultFraction,'/');
+                    break;
+                default:
+                    alert("До свидания");
+                    break;
+            }
+        } while (fractionAnswer <= '4');
+
+        /*  Задание 3
+        Создать объект, описывающий время (часы, минуты, секунды), и следующие функции для работы с этим объектом.
+            1. Функция вывода времени на экран.
+            2. Функция изменения времени на переданное количество секунд.
+            3. Функция изменения времени на переданное количество минут.
+            4. Функция изменения времени на переданное количество часов.
+        Учтите, что в последних 3-х функциях, при изменении одной
+        части времени, может измениться и другая. Например: если ко
+        времени «20:30:45» добавить 30 секунд, то должно получиться
+        «20:31:15», а не «20:30:75».*/
+
+        function getTimeObject() {
+            let objHour;
+            let objMinute;
+            let objSecond;
+            objHour = +prompt("Введите кол-во часов");
+            objMinute = +prompt("Введите кол-во минут");
+            objSecond = +prompt("Введите кол-во секунд");
+            return new Time(objHour, objMinute, objSecond);
+        }
+        class Time {
+            constructor(hours, minutes, seconds) {
+                this.hours = hours,
+                    this.minutes = minutes,
+                    this.seconds = seconds;
+            }
+            output() {
+                alert(`${this.hours}:${(this.minutes < 10) ? '0' + this.minutes : this.minutes}:${(this.seconds < 10) ? '0' + this.seconds : this.seconds}`);
+            }
+            changesTimeSecond(value) {
+                this.seconds += value;
+                if (this.seconds >= 60) {
+                    let tmpSec = Math.floor(this.seconds / 60);
+                    this.minutes += tmpSec;
+                    this.seconds = this.seconds - (tmpSec * 60);
+                }
+            }
+            changesTimeMinutes(value) {
+                this.minutes += value;
+                if (this.minutes >= 60) {
+                    let tmpMin = Math.floor(this.minutes / 60);
+                    this.hours += tmpMin;
+                    this.minutes = this.minutes - (tmpMin * 60);
+                }
+            }
+            changesTimeHours(value) {
+                this.hours += value;
+            }
+        }
+        let timeAnswer;
+        let time = getTimeObject();
+        let changeTime;
+        do {
+            timeAnswer = prompt("Задание 3\nВыберите пункт меню\n1.Вывода времени на экран\n2.Изменения времени на переданное количество секунд\n3.Изменения времени на переданное количество минут\n4.Изменения времени на переданное количество часов\n5.Выход");
+            switch(timeAnswer) {
+                case '1':
+                time.output();
+                break;
+                case '2':
+                changeTime = +prompt("Введите кол-во секунд");
+                time.changesTimeSecond(changeTime);
+                time.output();
+                break;
+                case '3':
+                changeTime = +prompt("Введите кол-во минут");
+                time.changesTimeMinutes(changeTime);
+                time.output();
+                break;
+                case '4':
+                changeTime = +prompt("Введите кол-во часов");
+                time.changesTimeHours(changeTime);
+                time.output();
+                break;
+                default:
+                alert("До свидания");
+                break;
+            }
+        } while (timeAnswer <= 4);
+
+
+    </script>
+</body>
+
+</html>

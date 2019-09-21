@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*  Задание 1
+        Создать массив «Список покупок». Каждый элемент массива является объектом, который содержит название продукта, необходимое количество и куплен или нет.
+        Написать несколько функций для работы с таким массивом.
+            1. Вывод всего списка на экран таким образом, чтобы сначала шли некупленные продукты, а потом – купленные.
+            2. Добавление покупки в список. Учтите, что при добавлении покупки с уже существующим в списке продуктом, необходимо увеличивать количество в существующей покупке,
+            а не добавлять новую.
+            3. Покупка продукта. Функция принимает название продукта и отмечает его как купленный.*/
+        function Purchase(name, count, isPurchased = false) {
+            this.name = name,
+            this.count = count,
+            this.isPurchased = isPurchased,
+            this.info = function () {
+                return (`Name - ${this.name} - Count - ${this.count} - IsPurchased - ${(this.isPurchased) ? `Yes` : `No`}`);
+            }
+        }
+        function buyProduct(nameProduct, array) {
+            if(array.some(purchase => purchase.name == nameProduct)) {
+                let index = array.findIndex((purchase) => purchase.name == nameProduct);
+                array[index].isPurchased = true;
+                alert("Покупка одобрена");
+            }
+            else {
+                alert("Данного продукта нет в списке");
+            }
+        }
+        function addPurchase(product, array) {
+            if(array.some(purchase => purchase.name == product.name)) {
+                let index = array.findIndex((purchase) => purchase.name == product.name);
+                array[index].count += product.count;
+                alert("Покупка есть в списке, её количество увеличилось");
+            }
+            else {
+                array.push(product);
+                alert("Покупка успешно добавлена");
+            }
+        }
+        function outputPurchase(array) {
+            array.sort(function (purchase1, purchase2) {
+                if(purchase1.isPurchased > purchase2.isPurchased){
+                    return -1;
+                }
+                else if(purchase2.isPurchased>purchase1.isPurchased){
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            })
+            let stringPurchase = "";
+            for(let i =0;i < array.length; ++i) {
+                stringPurchase += `${array[i].info()}\n`;
+            }
+            alert(stringPurchase);
+        }
+        let arrPurchase = [
+            new Purchase("Meat",4,true),
+            new Purchase("Bread",3,false),
+            new Purchase("Ice-Cream",2,false),
+            new Purchase("Fridge",1,true),
+            new Purchase("Potatoes",7,true),
+            new Purchase("Apple",6,false),
+            new Purchase("Cherry",10,true)
+        ]
+        let answer;
+        do{
+            answer = prompt("Задание 1\n Список покупок \n1.Вывод списка продуктов\n2.Добавление покупки в список\n3.Покупка продукта\n4.Выход");
+            switch(answer) {
+                case '1':
+                    outputPurchase(arrPurchase);
+                    break;
+                case '2':
+                    let name = prompt("Введите название продукта");
+                    let count = +prompt("Введите количество продуктов");
+                    addPurchase(new Purchase(name,count),arrPurchase);
+                    break;
+                case '3': 
+                    let purchase = prompt("Введите название продукта для покупки");
+                    buyProduct(purchase, arrPurchase);
+                    break;
+                default:
+                    alert("До свидания.");
+                    break;       
+            }
+        }while(answer <= '3');
+
+        /*  Задание 2
+        Создать массив, описывающий чек в магазине. Каждый элемент массива состоит из названия товара, количества и цены за единицу товара. Написать следующие функции.
+            1. Распечатка чека на экран.
+            2. Подсчет общей суммы покупки.
+            3. Получение самой дорогой покупки в чеке.
+            4. Подсчет средней стоимости одного товара в чеке. */
+
+        function printReceipt(array) {
+            let stringReceipt = "";
+            array.forEach(receipt => {
+                stringReceipt += `${receipt.output()}\n`;
+            });
+            alert(stringReceipt);
+        }
+
+        function totalPrice(array) {
+            let total = 0;
+            array.forEach(receipt => {
+                total += receipt.totalPrice();
+            })
+            alert(`Общая стоимость чека = ${total}`);
+        }
+        function middlePriceProduct(array) {
+            let middlePrice = 0;
+            array.forEach(receipt => {
+                middlePrice += receipt.totalPrice();
+            })
+            alert(`Средняя стоимость одного товара = ${(middlePrice / array.length).toFixed(2)}`);
+        }
+        function mostExpensivePurchase(array) {
+            let max = Math.max(...array.map(function (arr) { return arr.totalPrice() }));
+            let object = array.find(purchase => purchase.totalPrice() == max);
+            alert(`Самая дорогая покупка:\n${object.output()}`);
+        }
+        class Receipt {
+            constructor(nameProduct, countProduct, unitСost) {
+                this.nameProduct = nameProduct,
+                    this.countProduct = countProduct,
+                    this.unitСost = unitСost;
+            }
+            totalPrice() {
+                return (this.unitСost * this.countProduct);
+            }
+            output() {
+                return (`Product - ${this.nameProduct}   Quantity of goods - ${this.countProduct}   Unit Cost - ${this.unitСost}`);
+            }
+        }
+        let arrReceipt = [
+            new Receipt("Meat", 4, 60),
+            new Receipt("Bread", 3, 5.3),
+            new Receipt("Ice-Cream", 2, 10.5),
+            new Receipt("Fridge", 1, 250),
+            new Receipt("Potatoes", 7, 3.5),
+            new Receipt("Apple", 6, 5.5),
+            new Receipt("Cherry", 10, 11)
+        ]
+
+        do {
+            answer = prompt(`Задание 1\n Чек в магазине. \n1.Распечатка чека на экран.\n2.Подсчет общей суммы покупки.\n3.Получение самой дорогой покупки в чеке.
+4.Подсчет средней стоимости одного товара в чеке.\n5.Выход`);
+            switch (answer) {
+                case '1':
+                    printReceipt(arrReceipt);
+                    break;
+                case '2':
+                    totalPrice(arrReceipt);
+                    break;
+                case '3':
+                    mostExpensivePurchase(arrReceipt);
+                    break;
+                case '4':
+                    middlePriceProduct(arrReceipt);
+                    break;    
+                default:
+                    alert("До свидания.");
+                    break;
+            }
+        } while (answer <= '4');
+        
+        /*  Задание 4
+        Создать массив аудиторий академии. Объект-аудитория состоит из названия, количества посадочных мест (от 10 до 20) и названия факультета, для которого она предназначена.
+        Написать несколько функций для работы с ним.
+            1. Вывод на экран всех аудиторий.
+            2. Вывод на экран аудиторий для указанного факультета.
+            3. Вывод на экран только тех аудиторий, которые подходят для переданной группы. Объект-группа состоит из названия, количества студентов и названия факультета.
+            4. Функция сортировки аудиторий по количеству мест.
+            5. Функция сортировки аудиторий по названию (по алфавиту).*/
+        function Audience(nameAudience, numberOfSeats, facultyNames) {
+            this.nameAudience = nameAudience,
+                this.numberOfSeats = numberOfSeats,
+                this.facultyNames = facultyNames,
+                this.printAudience = function () {
+                    return (`Audience - ${this.nameAudience}, Number of Seats - ${this.numberOfSeats}, Faculty - ${this.facultyNames}\n`);
+                }
+        }
+        function Group(nameGroup, countStudent, nameFaculty) {
+            this.nameGroup = nameGroup,
+                this.countStudent = countStudent,
+                this.nameFaculty = nameFaculty
+        }
+        function printAllAudience(arrAudience) {
+            let stringAudience = "";
+            arrAudience.forEach(audience => {
+                stringAudience += `${audience.printAudience()}`;
+            });
+            alert(stringAudience);
+        }
+        function facultyAudience(nameFacylty, arrAudience) {
+            let facAudience = [];
+            arrAudience.forEach(audience => {
+                if (audience.facultyNames == nameFacylty) facAudience.push(audience);
+            })
+            if (facAudience.length == 0) alert("Для указанного факультета нет аудитории");
+            else printAllAudience(facAudience);
+        }
+        function printAudienceForGroup(group, arrAudience) {
+            let stringGroupAudience = [];
+            arrAudience.forEach(audience => {
+                if ((audience.facultyNames == group.nameFaculty) && (audience.numberOfSeats >= group.countStudent)) stringGroupAudience.push(audience);
+            })
+            if (stringGroupAudience.length == 0) alert("Для вашей группы нет подходящих аудиторий");
+            else printAllAudience(stringGroupAudience);
+        }
+        function sortToNumberOfSeats(arrAudience) {
+            arrAudience.sort(function (audience1, audience2) {
+                return audience1.numberOfSeats - audience2.numberOfSeats;
+            })
+            printAllAudience(arrAudience);
+        }
+        function sortToNameAudience(arrAudience) {
+            arrAudience.sort(function (audience1, audience2) {
+                if (audience1.facultyNames > audience2.facultyNames) return 1;
+                else if (audience2.facultyNames > audience1.facultyNames) return -1;
+                return 0;
+            })
+            printAllAudience(arrAudience);
+        }
+        function getGroup() {
+            let nameGroup = prompt("Введите название группы");
+            let countStudent = prompt("Введите кол-во студентов");
+            let nameFaculty = prompt("Введите название факультета");
+            return new Group(nameGroup, countStudent, nameFaculty);
+        }
+        let arrAudience = [
+            new Audience("2-3", 14, "Филологический"),
+            new Audience("2-4", 11, "Биологический"),
+            new Audience("2-5", 10, "Филологический"),
+            new Audience("3-3", 15, "Физический"),
+            new Audience("3-2", 12, "Прикладная математика и информатика"),
+            new Audience("3-1", 20, "Журналистика"),
+            new Audience("4-6", 19, "Химический"),
+            new Audience("4-7", 17, "Физический"),
+            new Audience("4-8", 14, "Журналистика"),
+            new Audience("5-9", 15, "Прикладная математика и информатика"),
+        ]
+
+        do {
+            answer = prompt(`Задание 4\nАудитории академии\n1.Вывод на экран всех аудиторий.\n2.Вывод на экран аудиторий для указанного факультета.
+3.Вывод на экран только тех аудиторий, которые подходят для переданной группы.\n4.Функция сортировки аудиторий по количеству мест.
+5.Функция сортировки аудиторий по названию (по алфавиту).\n6.Выход`);
+            switch (answer) {
+                case '1':
+                    printAllAudience(arrAudience);
+                    break;
+                case '2':
+                    let nameAud = prompt("Введите название факультета");
+                    facultyAudience(nameAud, arrAudience);
+                    break;
+                case '3':
+                    let group = getGroup();
+                    printAudienceForGroup(group, arrAudience);
+                    break;
+                case '4':
+                    sortToNumberOfSeats(arrAudience);
+                    break;
+                case '5':
+                    sortToNameAudience(arrAudience);
+                    break;
+                default:
+                    alert("До свидания");
+                    break;
+            }
+        } while (answer <= '5');
+        /*  Задание 3
+        Создать массив css-стилей (цвет, размер шрифта, выравнивание, подчеркивание и т. д.).
+        Каждый элемент массива – это объект, состоящий из двух свойств: название стиля и значение стиля.
+        Написать функцию, которая принимает массив стилей и
+        текст, и выводит этот текст с помощью document.write() в тегах
+        <p></p>, добавив в открывающий тег атрибут style со всеми стилями, перечисленными в массиве. */
+
+        let arrayCss = [
+            {
+                name: "color",
+                value: "red"
+            },
+            {
+                name: "font-size",
+                value: "28px"
+            },
+            {
+                name: "text-align",
+                value: "center"
+            },
+            {
+                name: "font-family",
+                value: "Segoe UI"
+            },
+            {
+                name: "text-decoration",
+                value: "underline"
+            },
+            {
+                name: "letter-spacing",
+                value: "5px"
+            },
+            {
+                name: "font-weight",
+                value: "bold"
+            },
+            {
+                name: "background-color",
+                value: "black"
+            }
+        ]
+        function printTextWithCss(arraCss, text) {
+            document.write(`<p style='${arrayCss[0].name}:${arrayCss[0].value};${arrayCss[1].name}:${arrayCss[1].value};
+            ${arrayCss[2].name}:${arrayCss[2].value};${arrayCss[3].name}:${arrayCss[3].value};${arrayCss[4].name}:${arrayCss[4].value};
+            ${arrayCss[5].name}:${arrayCss[5].value};${arrayCss[6].name}:${arrayCss[6].value};${arrayCss[7].name}:${arrayCss[7].value}'>${text}</p>`);
+        }
+        let text = `C++ никогда не достиг бы необходимой зрелости без интенсивного  
+        использования, советов и конструктивной критики со стороны друзей и коллег. В частности, 
+        Tom Cargill, Jim Coplien, Stu Feldman, Sandy Fraser, Steve Johnson, Brian Kernighan, 
+        Bart Locanthi, Doug Mcllroy, Dennis Ritchie, Larry Rosier, Jerry Schwarz и Jon Shopiro 
+        подали важные для развития языка идеи. Dave Presotto написал текущую  
+        реализацию библиотеки потокового ввода/вывода. 
+        Кроме того, сотни людей способствовали развитию языка C++ и его  
+        компилятора, присылая мне свои предложения по улучшениям, описания проблем, с  
+        которыми они сталкивались, а также сообщения об ошибках компилятора. Я могу  
+        отметить здесь лишь некоторых: Gary Bishop, Andrew Hume, Tom Karzes, Victor 
+        Milenkovic, Rob Murray, Leonie Rose, Brian Schmult, и Gary Walker. 
+        Множество людей помогали с изданием данной книги. Среди них: Jon Bentley, 
+        Laura Eaves, Brian Kernighan, Ted Kowalski, Steve Mahaney, Jon Shopiro и участники 
+        семинара по C++ в Bell Labs, Columbus, штат Ohio (Огайо), 26-27 июня 1985 года.`
+        printTextWithCss(arrayCss, text);
+
+    </script>
+</body>
+
+</html>

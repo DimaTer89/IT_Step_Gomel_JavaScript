@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        "use strict"
+        /*  Задание 1
+        Реализовать класс, описывающий окружность. В классе должны быть следующие компоненты:
+        ■ поле, хранящее радиус окружности;
+        ■ get-свойство, возвращающее радиус окружности;
+        ■ set-свойство, устанавливающее радиус окружности;
+        ■ get-свойство, возвращающее диаметр окружности;
+        ■ метод, вычисляющий площадь окружности;
+        ■ метод, вычисляющий длину окружности.
+        Продемонстрировать работу свойств и методов.*/
+        class Circle {
+            constructor(radius = 2) {
+                this.radius = radius;
+            }
+            get getRadius(){
+                return this.radius;
+            }
+            set setRadius(value){
+                if(value > 0) this.radius = value;
+                else this.radius = 1;
+            }
+            get getDiametr(){
+                return (this.radius * 2);
+            }
+            areaCircle() {
+                return (3.1415 * this.radius**2).toFixed(2);
+            }
+            lenghtCircle(){
+                return (3.1415 * this.getDiametr).toFixed(2);
+            }
+        }
+        let answer;
+        let circle = new Circle();
+        do{
+            answer = prompt(`Реализовать класс, описывающий окружность\n1.Показать радиус\n2.Установить радиус\n3.Показать диаметр
+4.Вычислить площадь окружность\n5.Вычислить длину окружности\n6.Выход`);
+            switch(answer){
+                case '1':
+                alert(`Радиус окружности -  ${circle.getRadius}`);
+                break;
+                case '2':
+                let radius = +prompt("Введите радиус окружности");
+                circle.setRadius = radius;
+                alert("Изменения приняты");
+                break;
+                case '3':
+                alert(`Диаметр окружности -  ${circle.getDiametr}`);
+                break;
+                case '4':
+                alert(`Площадь круга - ${circle.areaCircle()}`);
+                break;
+                case '5':
+                alert(`Длина окружности - ${circle.lenghtCircle()}`);
+                break;
+                default:
+                alert("До свидания");
+                break;
+            }
+        }while(answer <= "5")
+
+        /*  Задание 2
+        Реализовать класс, описывающий html элемент.
+        Класс HtmlElement должен содержать внутри себя:
+            ■ название тега;
+            ■ самозакрывающийся тег или нет;
+            ■ текстовое содержимое;
+            ■ массив атрибутов;
+            ■ массив стилей;
+            ■ массив вложенных таких же тегов;
+            ■ метод для установки атрибута;
+            ■ метод для установки стиля;
+            ■ метод для добавления вложенного элемента в конец текущего элемента;
+            ■ метод для добавления вложенного элемента в начало текущего элемента;
+            ■ метод getHtml(), который возвращает html код в виде строки, включая html код вложенных элементов.*/
+
+        class HtmlElement {
+            constructor(tagName, isTagSelfClose, text = undefined) {
+                this.tagName = tagName,
+                    this.isTagSelfClose = isTagSelfClose,
+                    this.text = text,
+                    this.arrAttributies = [],
+                    this.arrStyles = [],
+                    this.arrTag = [];
+            }
+            setAttributies(value) {
+                this.arrAttributies.push(value);
+            }
+            setStyle(value) {
+                this.arrStyles.push(value);
+            }
+            setTagInEnd(value) {
+                this.arrTag.push(value);
+            }
+            setTagInBegin(value) {
+                this.arrTag.unshift(value);
+            }
+            getStringTags() {
+                let stringTags = "";
+                for (let i = 0; i < this.arrTag.length; ++i) {
+                    stringTags += `${this.arrTag[i].getHtml()}`;
+                    if (i != this.arrTag.length - 1) stringTags += "\n";
+                    else continue;
+                }
+                return stringTags;
+            }
+            getStringAttributies() {
+                let stringAttributies = "";
+                for (let i = 0; i < this.arrAttributies.length; ++i) {
+                    stringAttributies += `${this.arrAttributies[i].name}=${this.arrAttributies[i].value}`;
+                    if (i != this.arrAttributies.length - 1) stringAttributies += " ";
+                    else continue;
+                }
+                return stringAttributies;
+            }
+            getStringStyles() {
+                let stringStyles = `style=`;
+                for (let i = 0; i < this.arrStyles.length; ++i) {
+                    stringStyles += this.arrStyles[i].name + ':' + this.arrStyles[i].value + ";";
+                }
+                return stringStyles;
+            }
+            getHtml() {
+                if (this.isTagSelfClose) {
+                    return (`<${this.tagName} ${(this.arrAttributies.length > 0) ? this.getStringAttributies() : +''} ${(this.arrStyles.length > 0) ? this.getStringStyles() : +''}/>`);
+                }
+                else {
+                    return (`<${this.tagName} ${(this.arrAttributies.length>0)?this.getStringAttributies():+''} ${(this.arrStyles.length>0) ? this.getStringStyles() :+''}>${(this.text == undefined)?"":this.text} ${(this.arrTag.length > 0)?this.getStringTags():''}</${this.tagName}>`);
+                }
+
+            }
+        }
+        let wrapper = new HtmlElement("div", false);
+        wrapper.setStyle({
+            name: "display",
+            value: "flex"
+        });
+        wrapper.setAttributies({
+            name: "id",
+            value: "wrapper"
+        })
+        let div = new HtmlElement("div", false);
+        div.setStyle({
+            name: "width",
+            value: "300px"
+        });
+        div.setStyle({
+            name: "margin",
+            value: "10px"
+        });
+        let h3 = new HtmlElement("h3",false," What is Lorem Ipsum ?");
+        let img = new HtmlElement("img",true);
+        img.setStyle({
+            name: "width",
+            value: "100%"
+        });
+        img.setAttributies({
+            name: "src",
+            value: "https://image.shutterstock.com/image-vector/white-jpg-file-document-download-260nw-1500246968.jpg"
+        });
+        img.setAttributies({
+            name: "alt",
+            value: "Lorem Ipsum"
+        });
+        div.setTagInBegin(h3);
+        div.setTagInEnd(img);
+        let p = new HtmlElement("p",false,`Lorem Ipsum is simply dummy text of the printing and typesetting industry
+. Lorem Ipsum has been the industry's standart dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.`);
+        let a = new HtmlElement("a",false,"More...");
+        a.setAttributies({
+            name:"href",
+            value: "https://www.lipsum.com/"
+        });
+        a.setAttributies({
+            name:"target",
+            value:"_blank"
+        });
+        p.setStyle({
+            name:"text-align",
+            value:"justify"
+        });
+        p.setTagInBegin(a);
+        div.setTagInEnd(p);
+        wrapper.setTagInBegin(div);
+        wrapper.setTagInEnd(div);
+        document.write(wrapper.getHtml());
+
+        /*  Задание 3
+        Реализовать класс, который описывает css класс.
+        Класс CssClass должен содержать внутри себя:
+            ■ название css класса;
+            ■ массив стилей;
+            ■ метод для установки стиля;
+            ■ метод для удаления стиля;
+            ■ метод getCss(), который возвращает css код в виде строки.*/
+        class CssClass{
+            constructor(nameClass){
+                this.nameClass = nameClass,
+                this.arrStyle = [];
+            }
+            setStyle(value){
+                this.arrStyle.push(value);
+            }
+            deleteStyle(value){
+                let index = this.arrStyle.findIndex(style => style.name == value.name && style.value == value.value);
+                alert(index);
+                if(index != -1){
+                    this.arrStyle.splice(index,1);
+                }
+            }
+            getCss(){
+                let stringCss = `.${this.nameClass}{`;
+                for(let i = 0; i < this.arrStyle.length; ++i) {
+                    stringCss +=`\n${this.arrStyle[i].name}:${this.arrStyle[i].value};`;
+                }     
+                stringCss += "\n}";           
+                return stringCss;
+            }
+        } 
+        let cssClass = new CssClass("btn");
+        cssClass.setStyle({
+            name: "width",
+            value: "300px"
+        });
+        cssClass.setStyle({
+            name: "margin",
+            value: "10px"
+        });
+
+        /*  Задание 4
+        Реализовать класс, описывающий блок html документ.
+        Класс HtmlBlock должен содержать внутри себя:
+            ■ коллекцию стилей, описанных с помощью класса CssClass;
+            ■ корневой элемент, описанный с помощью класса HtmlElement;
+            ■ метод getCode(), который возвращает строку с html кодом (сначала теги style с описанием всех классов, а потом 
+            все html  содержимое из корневого тега и его вложенных элементов).
+        С помощью написанных классов реализовать следующий блок (см. рис. 2) и добавить его на страницу с помощью document.write().*/     
+        class HtmlBlock {
+            constructor(arrCssClass, htmlElement) {
+                this.arrCssClass = arrCssClass,
+                this.htmlElement = htmlElement;
+            }
+            getStylesCode(){
+                let stringStylesCode = "<style>"
+                for(let i = 0; i < this.arrCssClass.length; ++i) {
+                    stringStylesCode += `\n${this.arrCssClass[i].getCss()}`;
+                }
+                stringStylesCode += "\n</style>\n";
+                return stringStylesCode;
+            }
+            getCode() {
+                return (this.getStylesCode() + this.htmlElement.getHtml());
+            }
+        }   
+
+        let wrapper_1 = new HtmlElement("div",false);
+        wrapper_1.setAttributies({
+            name:"id",
+            value:"wrapper"
+        });
+        wrapper_1.setAttributies({
+            name:"class",
+            value:"wrap"
+        });
+        let h3_1 = new HtmlElement("h3",false," What is Lorem Ipsum ?");
+        let img_1 = new HtmlElement("img",true);
+        img_1.setAttributies({
+            name:"class",
+            value:"img"
+        });
+        img_1.setAttributies({
+            name: "src",
+            value: "https://image.shutterstock.com/image-vector/white-jpg-file-document-download-260nw-1500246968.jpg"
+        });
+        img_1.setAttributies({
+            name: "alt",
+            value: "Lorem Ipsum"
+        })
+        let p_1 = new HtmlElement("p",false,`Lorem Ipsum is simply dummy text of the printing and typesetting industry
+. Lorem Ipsum has been the industry's standart dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.`);
+        let a_1 = new HtmlElement("a",false,"More...");
+        a_1.setAttributies({
+            name:"href",
+            value: "https://www.lipsum.com/"
+        });
+        a_1.setAttributies({
+            name:"target",
+            value:"_blank"
+        });
+        p_1.setAttributies({
+            name:"class",
+            value:"text"
+        });
+        let div_1 = new HtmlElement("div",false);
+        div_1.setAttributies({
+            name:"class",
+            value:"block"
+        });
+        div_1.setTagInBegin(h3_1);
+        div_1.setTagInEnd(img_1);
+        div_1.setTagInEnd(p_1);
+        wrapper_1.setTagInBegin(div_1);
+        wrapper_1.setTagInEnd(div_1);
+        let cssClass1 = new CssClass("wrap");
+        let cssClass2 = new CssClass("block");
+        let cssClass3 = new CssClass("img");
+        let cssClass4 = new CssClass("text");
+        cssClass1.setStyle({
+            name:"display",
+            value:"flex"
+        });
+        cssClass2.setStyle({
+            name:"width",
+            value:"300px"
+        });
+        cssClass2.setStyle({
+            name:"margin",
+            value:"10px"
+        });
+        cssClass3.setStyle({
+            name:"width",
+            value:"100%"
+        });
+        cssClass4.setStyle({
+            name:"text-align",
+            value:"justify"
+        });
+        let arrStyles = [cssClass1,cssClass2,cssClass3,cssClass4];
+        let htmlBlock = new HtmlBlock(arrStyles,wrapper_1);
+        document.write(htmlBlock.getCode());
+
+    </script>
+</body>
+
+</html>

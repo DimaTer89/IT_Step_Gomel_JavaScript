@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        //1. Запросить у пользователя его возраст и определить, кем он является: ребенком (0–2), подростком (12–18), взрослым (18_60) или пенсионером (60– ...).
+         let age = prompt("Сколько вам лет ");
+         if(age >=0 && age <= 2){
+            alert("Вы ребёнок");
+         }
+         else if(age >= 12 && age < 18){
+            alert("Вы подросток");
+         }
+         else if(age >= 18 && age < 60){
+            alert("Вы взрослый");
+         }
+         else{
+            alert("Вы пенсионер");
+         }
+
+         //2. Запросить у пользователя число от 0 до 9 и вывести ему спецсимвол, который расположен на этой клавише (1–!, 2–@, 3–# и т. д). 
+         let digit = prompt("Введите число от 0 - 9");
+         switch(digit){
+            case '0': 
+            alert(")");
+            break;
+            case '1':
+            alert("!");
+            break;
+            case '2':
+            alert("@");
+            break;
+            case '3':
+            alert("#");
+            break;
+            case '4':
+            alert("$");
+            break;
+            case '5':
+            alert("%");
+            break;
+            case '6':
+            alert("^");
+            break;
+            case '7':
+            alert("&");
+            break;
+            case '8':
+            alert("*");
+            break;
+            case '9':
+            alert("(");
+            break;
+         }
+
+         //3. Запросить у пользователя трехзначное и число и проверить, есть ли в нем одинаковые цифры. 
+         let number = prompt("Введите трёхзначное число");
+         if((number[0] == number[1] || number[0] == number[2]) || number[1] == number[2]){
+            alert("В числе есть одинаковые цифры");
+         }
+         else {
+            alert("В числе нет одинаковых цифр");
+         }
+
+         //4. Запросить у пользователя год и проверить, високосный он или нет. Високосный год либо кратен 400, либо кратен 4 и при этом не кратен 100.
+         let year1 = prompt("Введите год");
+         if(!!(year1 % 4) && !!(year1 % 100)){
+            alert(`${year1} год - не Высокосный`);
+         }
+         else{
+            alert(`${year1} год - Высокосный`);
+         }
+
+         //5. Запросить у пользователя пятиразрядное число и определить, является ли оно палиндромом. 
+         let userDigit = prompt("Введите пятиразрядное число", 48965);
+         let bool = true;
+         let i = 0;
+         let j = 4;
+         while(i < j){
+            if(userDigit[i]==userDigit[j]){
+               i++;
+               j--;
+               continue;
+            }
+            else{
+               bool=false;
+               break;
+            }
+         }
+         if(bool){
+            alert(`Число ${userDigit} является палиндромом`);
+         }
+         else{
+            alert(`Число ${userDigit} не является палиндромом`)
+         }
+
+         //6. Написать конвертор валют. Пользователь вводит количество USD, выбирает, в какую валюту хочет перевести: EUR, UAN или AZN, и получает в ответ соответствующую сумму.
+         const eur = 0.89;
+         const uan = 25.26;
+         const azn = 1.71;
+         let dollarSum = prompt("Введите сумму в USD");
+         let rate = prompt("Введите валюту в какую перевести \nEUR\nUAN\nAZN","EUR");
+         switch(rate){
+            case "eur":
+            case "EUR":
+            alert(`За ${dollarSum} долларов Вы получите ${Math.floor(dollarSum * eur)} евро`);
+            break;
+            case "uan":
+            case "UAN":
+            alert(`За ${dollarSum} долларов Вы получите ${Math.floor(dollarSum * uan)} гривны`);
+            break;
+            case "azn":
+            case "AZN":
+            alert(`За ${dollarSum} долларов Вы получите ${Math.floor(dollarSum * azn)} азербайджанских манатов`);
+            break;
+            default:
+            alert(`Не возможно сделать конверсию`);
+            break;
+         }
+
+         //7. Запросить у пользователя сумму покупки и вывести сумму к оплате со скидкой: от 200 до 300 – скидка будет 3%, от 300 до 500 – 5%, от 500 и выше – 7%.
+         let purchase = prompt("Введите сумму покупки");
+         if(purchase < 200){
+            alert(`К оплате ${purchase}`);
+         }
+         else if(purchase >= 200&& purchase < 300){
+            alert(`К оплате ${purchase - (purchase * 0.03)}`);
+         }
+         else if(purchase >=300 && purchase < 500){
+            alert(`К оплате ${purchase - (purchase * 0.05)}`);
+         }
+         else {
+            alert(`К оплате ${purchase - (purchase * 0.07)}`);
+         }
+
+         //8. Запросить у пользователя длину окружности и периметр квадрата. Определить, может ли такая окружность поместиться в указанный квадрат. 
+         let lenghtCircle = prompt("Введите длину окружности");
+         let perimert = prompt("Введите периметр квадрата");
+         const pi = 3.1415;
+         let diametrCircle = lenghtCircle / pi;
+         let lenghtQuadrate = perimert / 4;
+         if(diametrCircle<=lenghtQuadrate){
+            alert(`Окружность с длиной ${lenghtCircle} поместиться в квадрат с периметром ${perimert}`);
+         } 
+         else{
+            alert(`Окружность с длиной ${lenghtCircle} не поместиться в квадрат с периметром ${perimert}`);
+         }
+
+         //9. Задать пользователю 3 вопроса, в каждом вопросе по 3 варианта ответа. За каждый правильный ответ начисляется 2 балла. После вопросов выведите пользователю количество набранных баллов. 
+         let ball = 0;
+         let trueAnswer = 2;
+         let quashen1 = prompt("Когда началась Вторая Мировая Война \n1. 1939\n2. 1941\n3. 1945");
+         let quashen2 = prompt("Кем был написан язык программирования С++ \n1. Деннис Ритчи \n2. Бьёрн Страуструп \n3. Эндрю Троелсен");
+         let quashen3 = prompt("Кто написал трагикомедию \"Божественная комедия\" \n1. Платон \n2. Кен Кизи \n3. Данте Алигьери");
+         if(quashen1 == "1" || quashen1 == "1939"){
+            ball+=trueAnswer;
+         }
+         if(quashen2 == "2" || quashen2 == "Бьёрн Страуструп"){
+            ball+=trueAnswer;
+         }
+         if(quashen3 == "3" || quashen3 == "Данте Алигьери"){
+            ball+=trueAnswer;
+         }
+         alert(`Вы набрали ${ball} баллов`);
+
+         //10. Запросить дату (день, месяц, год) и вывести следующую за ней дату. Учтите возможность перехода на следующий месяц, год, а также високосный год. 
+         let date = prompt("Введите дату в формате день.месяц.год", "17.08.2019");
+         let arr = date.split('.');
+         let data = arr[0];
+         let mounth = arr[1];
+         let year = arr[2];
+         if(mounth == "02"){
+            if(data < 28){
+               ++data;
+               if(data < 10){
+                  data = "0" + data;
+               }
+            }
+            else if(data ==28){
+               if(!!(year % 4) && !!(year % 100)){
+                  data = "01";
+                  ++mounth;
+                  mounth = "0" + mounth;
+               }
+               else {
+                  ++data;
+                  if(data < 10){
+                     data = "0" + data;
+                  }
+               }
+            }
+            else if(data == 29){
+               data = "01";
+               ++mounth;
+               mounth = "0" + mounth;
+            }
+         }
+         else if(mounth == "12"){
+            if(data == "31"){
+               data = "01";
+               mounth = "01";
+               ++year;
+            }
+            else {
+               ++data;
+               if(data < 10){
+                  data = "0" + data;
+               }
+            }
+         }
+         else {
+            switch(mounth){
+               case "01":
+               case "03":
+               case "05":
+               case "07":
+               case "08":
+               case "10":
+               if(data == "31"){
+                  data = "01";
+                  ++mounth;
+                  if(mounth < 10){
+                     mounth = "0" + mounth;
+                  }
+               }
+               else{
+                  ++data;
+                  if(data < 10){
+                  data = "0" + data;
+               }
+               }
+               break;
+               case "04":
+               case "06":
+               case "09":
+               case "11":
+               if(data == "30"){
+                  data = "01";
+                  ++mounth;
+                  if(mounth < 10){
+                     mounth = "0" + mounth;
+                  }
+               }
+               else {
+                  ++data;
+                  if(data < 10){
+                     data = "0" + data;
+                  }
+               }
+               break;
+               default:
+               alert(`Не верный формат даты`);
+               break;
+            }
+         }
+         let newDate = data + '.' + mounth + '.' + year;
+         alert(`Новая дата на 1 день вперёд : ${newDate}`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*1. Написать функцию, которая принимает 2 числа и возвращает -1, если первое меньше, чем второе; 1 – если первое
+        больше, чем второе; и 0 – если числа равны.*/
+        function relation(num1, num2) {
+            return (num1 > num2) ? 1:(num1 < num2) ? -1:0;
+        }
+        let number1 = +prompt("Введите первое число");
+        let number2 = +prompt("Введите второе число");
+        alert(`Первое число > второго - 1\nВторое число > первого - -1\nПервое число = второму - 0\nВаш результат - ${relation(number1,number2)}`);
+
+        //2. Написать функцию, которая вычисляет факториал переданного ей числа.
+        function fact(num) {
+            if(num < 1) return 1;
+            return num * fact(--num);
+        }
+        let factNumber = +prompt("Введите число, для которого вычислить факториал");
+        alert(`Ваш результат - ${factNumber}! = ${fact(factNumber)}`);
+
+        /*3. Написать функцию, которая принимает три отдельные
+        цифры и превращает их в одно число. Например: цифры
+        1, 4, 9 превратятся в число 149.*/
+        function threeInOne (digit1,digit2,digit3) {
+             return Number((digit1 + digit2 + digit3));
+         }
+         let oneDigit = prompt("Введите первую цифру");
+         let twoDigit = prompt("Введите вторую цифру");
+         let threeDigit = prompt("Введите третью цифру"); 
+         alert(`Ваше число - ${threeInOne(oneDigit,twoDigit,threeDigit)}`);
+
+        /*4. Написать функцию, которая принимает длину и ширину
+        прямоугольника и вычисляет его площадь. Если в функцию
+        передали 1 параметр, то она вычисляет площадь квадрата*/
+        function square () {
+            if(arguments.length > 1) {
+                return (arguments[0] * arguments[1]);
+            }
+            else {
+                return arguments[0] ** 2;
+            }
+        }
+        let widht = +prompt("Введите ширину стороны прямоугольника");
+        let lenght1 = +prompt("Введите длину стороны прямоугольника");
+        alert(`Площадь прямоугольника - ${square(widht,lenght1)}`);
+        let lenght2 = +prompt("Введите длину стороны квадрата");
+        alert(`Площадь квадрата - ${square(lenght2)}`);
+
+        /*5. Написать функцию, которая проверяет, является ли переданное ей число совершенным. Совершенное число – это
+        число, равное сумме всех своих собственных делителей.*/
+        function dividers(num) {
+            let sumDividers = 0;
+            let tmpNum = 1;
+            while(tmpNum < num) {
+                if(num % tmpNum == 0) {
+                    sumDividers += tmpNum;
+                }
+                ++tmpNum;
+            }
+            return sumDividers;
+        }
+        function perfectNumber(number) {
+            return (dividers(number) == number) ? true:false;
+        }
+        let perfectDigit = +prompt("Введите число");
+        (perfectNumber(perfectDigit)) ? alert(`Число ${perfectDigit} - совершенное`) : alert(`Число ${perfectDigit} - несовершенное`);
+
+        /*6. Написать функцию, которая принимает минимальное и
+        максимальное значения для диапазона, и выводит только
+        те числа из диапазона, которые являются совершенными.
+        Используйте написанную ранее функцию, чтобы узнавать,
+        совершенное число или нет.*/
+        function perfectDigits(diaposonDigit1, diaposonDigit2) {
+            let strPerfectDigits = [];
+            while(++diaposonDigit1 < diaposonDigit2) {
+                if(perfectNumber(diaposonDigit1)) {
+                    strPerfectDigits.push(diaposonDigit1);
+                }
+            }
+            return strPerfectDigits;
+        }
+        let startDiaposon = +prompt("Введите начало диапозона(число)");
+        let endDiaposon = +prompt("Введите конец диапозона(число)");
+        alert(`Соверешнные числа в диапозоне от ${startDiaposon} до ${endDiaposon} - ${perfectDigits(startDiaposon,endDiaposon)}`);
+
+        /*7. Написать функцию, которая принимает время (часы, минуты, секунды) и выводит его на экран в формате «чч:мм:сс». 
+        Если при вызове функции минуты и/или секунды не были переданы, то выводить их как 00.*/
+        function timeToTimeString() {
+            if (arguments.length == 3) {
+                let tmpHour = arguments[0];
+                let tmpMinute = arguments[1];
+                let tmpSecond = arguments[2];
+                if (tmpSecond > 60) {
+                    tmpSecond = tmpSecond % 60;
+                    tmpMinute += Math.floor(arguments[2] / 60);
+                }
+                if (tmpMinute > 60) {
+                    tmpMinute = tmpMinute % 60;
+                    tmpHour += Math.floor(arguments[1] / 60);
+                }
+                if (tmpSecond == 0) {
+                    tmpSecond = "0";
+                }
+                if (tmpMinute == 0) {
+                    tmpMinute = "0";
+                }
+                if (tmpHour < 10) {
+                    tmpHour = "0" + tmpHour;
+                }
+                if (tmpMinute < 10) {
+                    tmpMinute = "0" + tmpMinute;
+                }
+                if (tmpSecond < 10) {
+                    tmpSecond = "0" + tmpSecond;
+                }
+                if(tmpMinute == undefined) {
+                    tmpMinute = "00";
+                }
+                if(tmpSecond == undefined) {
+                    tmpSecond = "00";
+                }
+                return (tmpHour + ":" + tmpMinute + ":" + tmpSecond);
+            }
+        }
+        let hours = +prompt("Введите количество часов");
+        let minutes = +prompt("Введите количество минут");
+        let seconds = +prompt("Введите количество секунд");
+        alert(`${timeToTimeString(hours, minutes, seconds)}`);
+
+        /*8. Написать функцию, которая принимает часы, минуты и
+        секунды и возвращает это время в секундах.*/
+        function timeToSecond(hour,minute,second) {
+            return  tmpSeconds = second + minute * 60 + hour * 3600;
+        }
+        let hour1 = +prompt("Введите кол-во часов");
+        let minute1 = +prompt("Введите кол-во минут");
+        let second1 = +prompt("Введите кол-во секунд");
+        alert(`${hour1} часов ${minute1} минут ${second1} секунд = ${timeToSecond(hour1,minute1,second1)} секундам`);
+        /*9. Написать функцию, которая принимает количество секунд,
+        переводит их в часы, минуты и секунды и возвращает в
+        виде строки «чч:мм:сс».*/
+        function secondsToHourMinuteSecond(timeInSecond) {
+            let hour2 = Math.floor(timeInSecond / 3600);
+            let minute2 = 0;
+            if (hour2 == 0) {
+                minute2 = Math.floor(timeInSecond / 60);
+            }
+            else {
+                let tmpSec = timeInSecond - hour2 * 3600;
+                minute2 = Math.floor(tmpSec / 60);
+
+            }
+            let second2 = timeInSecond % 60;
+            if (hour2 < 10) {
+                hour2 = "0" + hour2;
+            }
+            if (minute2 < 10) {
+                minute2 = "0" + minute2;
+            }
+            if (second2 < 10) {
+                second2 = "0" + second2;
+            }
+            return (hour2 + ":" + minute2 + ":" + second2);
+        }
+        let seconds2 = +prompt("Введите кол-во секунд");
+        alert(`${seconds2} секунд = ${secondsToHourMinuteSecond(seconds2)}`);
+
+        /*10. Написать функцию, которая считает разницу между датами.
+        Функция принимает 6 параметров, которые описывают 2
+        даты, и возвращает результат в виде строки «чч:мм:сс». При
+        выполнении задания используйте функции из предыдущих 2-х заданий: сначала обе даты переведите в секунды,
+        узнайте разницу в секундах, а потом разницу переведите
+        обратно в «чч:мм:сс».*/
+        function dateDifference(dateHour1,dateMinute1,dateSeconds1,dateHour2,dateMinute2,dateSeconds2) {
+            let date1 = timeToSecond(dateHour1,dateMinute1,dateSeconds1);
+            let date2 = timeToSecond(dateHour2,dateMinute2,dateSeconds2);
+            let finalDate;
+            if(date1 > date2) {
+                finalDate = date1 - date2;
+                return secondsToHourMinuteSecond(finalDate);
+            }
+            else {
+                finalDate = date2 - date1;
+                return secondsToHourMinuteSecond(finalDate);
+            }
+        }
+        let date1Hour = +prompt("Введите часы первой даты");
+        let date1Minute = +prompt("Введите минуты первой даты");
+        let date1Second = +prompt("Введите секунды первой даты");
+        let date2Hour = +prompt("Введите часы второй даты");
+        let date2Minute = +prompt("Введите минуты второй даты");
+        let date2Second = +prompt("Введите секунды второй даты");
+        alert(`Разница между ${date1Hour}:${date1Minute}:${date1Second} и ${date2Hour}:${date2Minute}:${date2Second}  = ${dateDifference(date1Hour,date1Minute,date1Second,date2Hour,date2Minute,date2Second)}`);
+
+         
+    </script>
+</body>
+
+</html>
