@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-image: url(footbalfield1.jpg);
+        background-color: aqua;
+    }
+
+    #ball {
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div id="field">
+        <div id="ball">
+            <img src="ball.png" alt="">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("click", function (event) {
+            console.dir(event);
+            let div = document.querySelector("#ball");
+            let positionX = div.offsetLeft;
+            let positionY = div.offsetTop;
+            let top = event.x;
+            let left = event.y;
+            if(top >= 1860) top -= 50;
+            if(left >= 916) left -= 52;
+            if(top < 50) top += 50;
+            if(left < 50) left += 50;
+            let dx = (top - positionX - 50) / 100;
+            let dy = (left - positionY - 52) / 100;
+            let frame = 0;
+            let moveBall = setInterval(() => {
+                positionY += dy;
+                positionX += dx;
+                div.style.top = positionY + "px";
+                div.style.left = positionX + "px";
+                if (++frame >= 100) clearInterval(moveBall);
+            }, 10);
+            div.style.top = top - 50;
+            div.style.left = left - 52;
+        });
+
+    </script>
+</body>
+
+</html>

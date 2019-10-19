@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #forms {
+            width: 320px;
+            height: 50px;
+            background-color: bisque;
+        }
+
+        #username {
+            width: 260px;
+            margin-left: 20px;
+        }
+
+        label {
+            margin-left: 20px;
+        }
+
+        #modalWindow {
+            border: 2px red solid;
+            width: 400px;
+            height: 120px;
+            position: fixed;
+            top: 40%;
+            left: 40%;
+            background-color: beige;
+        }
+
+        .modal {
+            display: none;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            overflow: auto;
+        }
+
+        #modalWindow h2 {
+            text-align: center;
+            font-size: 27px;
+        }
+
+        #modalWindow input {
+            width: 350px;
+            margin-left: 25px;
+            font-size: 28px;
+        }
+        #threeColor{
+            display: flex;
+            flex-direction: row;
+            border:2px solid darkgray;
+            width: 300px;
+            height: 100px;
+            background-color:darkgrey;
+        }
+        #red{
+            border:2px solid red;
+            border-radius: 10px;
+            width: 75px;
+            height: 75px;
+            margin:10px;
+            background-color: red;
+        }
+        #yellow{
+            border:2px solid yellow;
+            border-radius: 10px;
+            width: 75px;
+            height: 75px;
+            margin:10px;
+           
+        }
+        #green{
+            border:2px solid green;
+            border-radius: 10px;
+            width: 75px;
+            height: 75px;
+            margin:10px;
+        }
+        button{
+            width: 75px;
+            height: 75px;
+            border-radius:10px;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        #btn1,#btn2{
+            width: 100px;
+            height: 75px;
+            border-radius:10px;
+            font-size: 24px;
+        }
+       #btnBlock{
+           display: flex;
+           flex-direction: row;
+       }
+       #block1{
+           margin-top:50px;
+       }
+       #block2{
+           margin-left:50px;
+       }
+       .tooltip{
+           position: fixed;
+           width: 100px;
+           height: 75px;
+           border:2px solid fuchsia;
+           background-color: fuchsia;
+           border-radius:10px;
+           color:whitesmoke;
+           text-align: center;
+           font-size: 24px;
+           vertical-align: center;
+       }
+    </style>
+</head>
+
+<body>
+    <hr>
+    <div>
+        <h2>Задание 1</h2>
+        <form action="" id="forms" name="checkname">
+            <label for="username">Enter your name (name can't contain digits)</label>
+            <br>
+            <input type="text" name="yourname" id="username">
+        </form>
+        <hr>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 2</h2>
+        <input type="button" value="Open Model Window" id="openWindow">
+        <div id="modalWindow" class="modal">
+            <div class="modalHeader">
+                <h2>Hello from Modal Window</h2>
+            </div>
+            <div class="modalButton"><input type="button" value="close" width="350" id="close"></div>
+        </div>
+        <hr>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 4</h2>
+        <div id="threeColor">
+            <div id="red"></div>
+            <div id="yellow"></div>
+            <div id="green"></div>
+            <button id="next">Next</button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 5</h2>
+        <div>
+            <ol>
+                <li id="1">"JavaScript for Kids: A Playfuk Introduction to Programming" by Nick Morgan</li>
+                <li id="2">"Eloquent JavaScript: A Modern Introduction to Programming" by Marijn Haverbeke</li>
+                <li id="3">"JavaScript: The Good Parts" by Douglas Crockford</li>
+                <li id="4">"Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns JS Libraries" by Eric Elliot</li>
+                <li id="5">"Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript" by David Herman</li>
+                <li id="6">JavaScript The Definitive Guide" by David Flanagan</li>
+                <li id="7">"You Don't Know JS" by Kyle Simpson</li>
+            </ol>
+        </div>
+    </div>
+    <hr>
+    <div id="btnBlock">
+        <div id="block1"></p><button id="btn1">Button 1</button></div>
+        <div id="block2"><button id="btn2">Button 2</button></div>
+    </div>
+    <script>
+        document.checkname.yourname.addEventListener("input", () => {
+            let pattern = /\d+/;
+            let result = document.forms[0].yourname.value;
+            if (pattern.test(result)) {
+                document.forms[0].yourname.value = result.slice(0, result.length - 1);
+            }
+        });
+
+        document.querySelector("#openWindow").addEventListener("click", () => {
+            let div = document.querySelector(".modal");
+            div.style.display = "block";
+            document.querySelector("#close").addEventListener("click",()=>{
+                div.style.display = "none";
+            })
+        });
+
+        let count = 1;
+        document.querySelector("#next").addEventListener("click",() => {
+            ++count;
+            switch(count){
+                case 1:
+                document.querySelector("#red").style.backgroundColor = "red";
+                document.querySelector("#green").style.backgroundColor = "darkgrey";
+                break;
+                case 2:
+                document.querySelector("#red").style.backgroundColor = "darkgrey";
+                document.querySelector("#yellow").style.backgroundColor = "yellow";
+                break;
+                case 3:
+                document.querySelector("#yellow").style.backgroundColor = "darkgrey";
+                document.querySelector("#green").style.backgroundColor = "green";
+                break;
+            }
+            if(count >= 3) count = 0;
+        });
+        let flag = false;
+        let lastPath;
+        document.querySelector("ol").addEventListener("click", function(event){
+            if(flag) lastPath.style.backgroundColor = "white";
+            lastPath = event.path[0];
+            event.path[0].style.backgroundColor = "orange";
+            flag=true;
+        });
+        let tooltip;
+        document.querySelector("#btn1").addEventListener("mouseover",function(event){
+            let lastHr = document.querySelectorAll("hr");
+            let hrTop = lastHr[lastHr.length - 1].offsetTop;
+            let divTop = event.path[0].attributes[0].value;
+            let div = document.querySelector(`#${divTop}`);
+            tooltip = document.createElement("div");
+            tooltip.innerHTML = "Tool tip 1";
+            tooltip.className="tooltip";
+            document.body.append(tooltip);
+            let coorLeft = div.offsetLeft;
+            let coorTop;
+            if((div.offsetTop - hrTop - 10) < document.querySelector(".tooltip").clientHeight){
+                coorTop = div.offsetTop + div.clientHeight;
+            }
+            else {
+                coorTop = div.offsetTop - document.querySelector(".tooltip").clientHeight - 10;
+            }
+            tooltip.style.left = coorLeft + "px";
+            tooltip.style.top = coorTop + "px"; 
+        });
+        document.querySelector("#btn1").addEventListener("mouseout", function(event){
+            if(tooltip){
+                tooltip.remove();
+                tooltip = null;
+            }
+        });
+        document.querySelector("#btn2").addEventListener("mouseover",function(event){
+            let lastHr = document.querySelectorAll("hr");
+            let hrTop = lastHr[lastHr.length - 1].offsetTop;
+            let divTop = event.path[0].attributes[0].value;
+            let div = document.querySelector(`#${divTop}`);
+            tooltip = document.createElement("div");
+            tooltip.innerHTML = "Tool tip 2";
+            tooltip.className="tooltip";
+            document.body.append(tooltip);
+            let coorLeft = div.offsetLeft;
+            let coorTop;
+            if((div.offsetTop - hrTop - 10) < document.querySelector(".tooltip").clientHeight){
+                coorTop = div.offsetTop + div.clientHeight + 10;
+            }
+            else {
+                coorTop = div.offsetTop - document.querySelector(".tooltip").clientHeight - 10;
+            }
+            tooltip.style.left = coorLeft + "px";
+            tooltip.style.top = coorTop + "px"; 
+        });
+        document.querySelector("#btn2").addEventListener("mouseout", function(event){
+            if(tooltip){
+                tooltip.remove();
+                tooltip = null;
+            }
+        });
+    </script>
+</body>
+
+</html>
