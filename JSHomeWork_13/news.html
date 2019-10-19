@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .wrapper {
+            height: 100%;
+            width: 100%;
+            background-color: aqua;
+            padding: 25px;
+        }
+
+        .wrapper div {
+            width: 96%;
+            margin: 0 auto;
+            margin-bottom: 50px;
+            background-color: aqua;
+        }
+
+        .title {
+            font-size: 1.3em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper"></div>
+
+    
+
+    <script>
+        let wrapper = document.querySelector('.wrapper');
+        // массив новостей
+        let news = [{
+                title: "Lorem ipsum dolor sit amet?",
+                content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at velit ultrices, ullamcorper lacus in, aliquam dui. Nullam ac varius urna. Maecenas sem dui, tristique egestas aliquet ac, placerat fringilla mauris. Etiam risus tortor, consequat vitae lobortis in, porttitor ut erat. Curabitur ut porttitor turpis, quis placerat risus. In bibendum ex nisi, et vestibulum augue elementum sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec mattis nisi nulla, ac finibus quam feugiat at. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer molestie mattis urna, vel commodo justo commodo eget."
+            },
+            {
+                title: "Ut non eleifend leo!",
+                content: "Ut non eleifend leo. Praesent dictum eget mauris sit amet pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis pretium purus sit amet consectetur. Integer aliquet volutpat elit nec tristique. Praesent ac ullamcorper nisl. Aliquam velit tellus, lobortis ut arcu tincidunt, tempor porttitor neque. Nulla quis mollis ligula, eu consectetur ligula."
+            },
+            {
+                title: "Praesent fringilla fermentum lacus sit amet sodales!!!",
+                content: "Praesent fringilla fermentum lacus sit amet sodales. Nunc vehicula id nisi eu sollicitudin. Praesent nec dui rutrum, ultrices nisi eget, aliquam velit. Nunc consequat condimentum ante, tempus lobortis velit rhoncus a. Proin nec interdum tortor, eget tincidunt augue. Phasellus metus nisl, aliquet sit amet arcu vel, egestas pellentesque magna. Sed arcu nulla, hendrerit malesuada ullamcorper eu, accumsan ac quam. Nunc bibendum risus sit amet diam malesuada, sed maximus metus accumsan. Pellentesque blandit aliquam eros, ut malesuada dui maximus ut. Pellentesque egestas erat nec auctor tincidunt. Aenean metus lorem, suscipit id lacinia non, eleifend ut urna. Vivamus pharetra, tortor nec vehicula mollis, ipsum leo ullamcorper nunc, nec tincidunt dui lacus eu enim. Suspendisse quis nunc ante."
+            },
+            {
+                title: "Praesent in nulla euismod?",
+                content: "Praesent in nulla euismod, blandit nisi eget, consectetur enim. Integer est mauris, imperdiet et velit et, aliquet lobortis mi. Sed mattis lacus ac nulla rutrum, in lobortis nisl blandit. Phasellus mattis lacus in est ornare congue at quis elit. Pellentesque tortor eros, sollicitudin eget commodo feugiat, aliquet et est. Morbi ac tellus urna. Donec molestie sollicitudin ipsum, nec bibendum augue sollicitudin ac. Nullam eu metus risus. Phasellus at ligula id mi finibus porttitor sed vel diam. Aenean elementum aliquet lacus, at sodales quam commodo a."
+            },
+            {
+                title: "Morbi elementum ligula ante!",
+                content: "Aenean vulputate odio et arcu scelerisque, non placerat turpis tristique. Morbi elementum ligula ante, ac venenatis lectus sollicitudin et. Morbi sollicitudin cursus ante. Fusce eget viverra nisl, ullamcorper semper augue. Nam malesuada lacus id tortor congue aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta porttitor lorem non laoreet. Ut euismod neque magna, sed varius nunc laoreet non."
+            },
+            {
+                title: "Vivamus euismod hendrerit leo?",
+                content: "Vivamus euismod hendrerit leo, elementum fringilla purus ultricies eget. Ut leo leo, accumsan eu sollicitudin sed, scelerisque mollis magna. Sed lacus nunc, congue vitae purus et, luctus tempor lectus. Integer posuere erat et ipsum commodo, nec accumsan erat pulvinar. Fusce id maximus est. Etiam aliquam orci sem, id placerat metus aliquet accumsan. Integer tristique quam euismod mauris tristique sodales."
+            },
+            {
+                title: "Donec scelerisque ullamcorper risus.",
+                content: "Donec scelerisque ullamcorper risus. Fusce magna quam, pretium eget lorem et, consequat scelerisque metus. Quisque pretium sapien a hendrerit pharetra. Nulla sit amet neque eget ipsum rutrum lobortis. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce euismod scelerisque nisl, vel semper neque viverra vel."
+            },
+            {
+                title: "Nam ac pretium dui, in porta lectus!",
+                content: "Nam ac pretium dui, in porta lectus. Aliquam erat volutpat. Curabitur purus urna, mollis vitae posuere id, tincidunt in ante. Ut scelerisque rhoncus velit at aliquet. Aenean pellentesque elit enim, eget dictum quam auctor et. Nulla quis lacus sed nisi tincidunt sodales nec eu leo. Fusce gravida arcu ut magna bibendum feugiat. Pellentesque tellus leo, pretium in accumsan sit amet, venenatis vitae eros. Nam porttitor, risus aliquam volutpat porttitor, nisl quam interdum erat, id sodales nulla odio ut est. Nullam dictum ultricies est sed vestibulum. Suspendisse porta iaculis gravida. Suspendisse dolor tortor, dapibus ac imperdiet vitae, sodales eu ante. Nullam a enim convallis, ullamcorper ex eget, pretium nisi. Etiam bibendum turpis non viverra pellentesque. Etiam pellentesque sem odio. Mauris nec iaculis urna."
+            },
+            {
+                title: "Phasellus rhoncus.",
+                content: "Nullam lobortis feugiat justo nec porttitor. Sed vel aliquam sem, ac porttitor neque. Phasellus rhoncus turpis sapien, mollis lacinia est tempor viverra. Suspendisse nisi magna, scelerisque sed tincidunt ut, varius eget arcu. Cras aliquam eros a ante faucibus, sit amet laoreet justo rutrum. Aliquam pellentesque neque eu mi dapibus, eu dictum dolor vehicula. In vitae auctor tellus, in dignissim sapien. Phasellus ac orci nisi. Mauris feugiat sapien elit, eu sagittis turpis rhoncus id."
+            },
+            {
+                title: "Ut non eleifend leo!",
+                content: "Ut non eleifend leo. Praesent dictum eget mauris sit amet pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis pretium purus sit amet consectetur. Integer aliquet volutpat elit nec tristique. Praesent ac ullamcorper nisl. Aliquam velit tellus, lobortis ut arcu tincidunt, tempor porttitor neque. Nulla quis mollis ligula, eu consectetur ligula."
+            },
+            {
+                title: "Praesent fringilla fermentum lacus sit amet sodales!!!",
+                content: "Praesent fringilla fermentum lacus sit amet sodales. Nunc vehicula id nisi eu sollicitudin. Praesent nec dui rutrum, ultrices nisi eget, aliquam velit. Nunc consequat condimentum ante, tempus lobortis velit rhoncus a. Proin nec interdum tortor, eget tincidunt augue. Phasellus metus nisl, aliquet sit amet arcu vel, egestas pellentesque magna. Sed arcu nulla, hendrerit malesuada ullamcorper eu, accumsan ac quam. Nunc bibendum risus sit amet diam malesuada, sed maximus metus accumsan. Pellentesque blandit aliquam eros, ut malesuada dui maximus ut. Pellentesque egestas erat nec auctor tincidunt. Aenean metus lorem, suscipit id lacinia non, eleifend ut urna. Vivamus pharetra, tortor nec vehicula mollis, ipsum leo ullamcorper nunc, nec tincidunt dui lacus eu enim. Suspendisse quis nunc ante."
+            },
+            {
+                title: "Praesent in nulla euismod?",
+                content: "Praesent in nulla euismod, blandit nisi eget, consectetur enim. Integer est mauris, imperdiet et velit et, aliquet lobortis mi. Sed mattis lacus ac nulla rutrum, in lobortis nisl blandit. Phasellus mattis lacus in est ornare congue at quis elit. Pellentesque tortor eros, sollicitudin eget commodo feugiat, aliquet et est. Morbi ac tellus urna. Donec molestie sollicitudin ipsum, nec bibendum augue sollicitudin ac. Nullam eu metus risus. Phasellus at ligula id mi finibus porttitor sed vel diam. Aenean elementum aliquet lacus, at sodales quam commodo a."
+            },
+            {
+                title: "Morbi elementum ligula ante!",
+                content: "Aenean vulputate odio et arcu scelerisque, non placerat turpis tristique. Morbi elementum ligula ante, ac venenatis lectus sollicitudin et. Morbi sollicitudin cursus ante. Fusce eget viverra nisl, ullamcorper semper augue. Nam malesuada lacus id tortor congue aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta porttitor lorem non laoreet. Ut euismod neque magna, sed varius nunc laoreet non."
+            },
+            {
+                title: "Vivamus euismod hendrerit leo?",
+                content: "Vivamus euismod hendrerit leo, elementum fringilla purus ultricies eget. Ut leo leo, accumsan eu sollicitudin sed, scelerisque mollis magna. Sed lacus nunc, congue vitae purus et, luctus tempor lectus. Integer posuere erat et ipsum commodo, nec accumsan erat pulvinar. Fusce id maximus est. Etiam aliquam orci sem, id placerat metus aliquet accumsan. Integer tristique quam euismod mauris tristique sodales."
+            },
+            {
+                title: "Donec scelerisque ullamcorper risus.",
+                content: "Donec scelerisque ullamcorper risus. Fusce magna quam, pretium eget lorem et, consequat scelerisque metus. Quisque pretium sapien a hendrerit pharetra. Nulla sit amet neque eget ipsum rutrum lobortis. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce euismod scelerisque nisl, vel semper neque viverra vel."
+            },
+            {
+                title: "Nam ac pretium dui, in porta lectus!",
+                content: "Nam ac pretium dui, in porta lectus. Aliquam erat volutpat. Curabitur purus urna, mollis vitae posuere id, tincidunt in ante. Ut scelerisque rhoncus velit at aliquet. Aenean pellentesque elit enim, eget dictum quam auctor et. Nulla quis lacus sed nisi tincidunt sodales nec eu leo. Fusce gravida arcu ut magna bibendum feugiat. Pellentesque tellus leo, pretium in accumsan sit amet, venenatis vitae eros. Nam porttitor, risus aliquam volutpat porttitor, nisl quam interdum erat, id sodales nulla odio ut est. Nullam dictum ultricies est sed vestibulum. Suspendisse porta iaculis gravida. Suspendisse dolor tortor, dapibus ac imperdiet vitae, sodales eu ante. Nullam a enim convallis, ullamcorper ex eget, pretium nisi. Etiam bibendum turpis non viverra pellentesque. Etiam pellentesque sem odio. Mauris nec iaculis urna."
+            },
+            {
+                title: "Phasellus rhoncus.",
+                content: "Nullam lobortis feugiat justo nec porttitor. Sed vel aliquam sem, ac porttitor neque. Phasellus rhoncus turpis sapien, mollis lacinia est tempor viverra. Suspendisse nisi magna, scelerisque sed tincidunt ut, varius eget arcu. Cras aliquam eros a ante faucibus, sit amet laoreet justo rutrum. Aliquam pellentesque neque eu mi dapibus, eu dictum dolor vehicula. In vitae auctor tellus, in dignissim sapien. Phasellus ac orci nisi. Mauris feugiat sapien elit, eu sagittis turpis rhoncus id."
+            },
+            {
+                title: "Ut non eleifend leo!",
+                content: "Ut non eleifend leo. Praesent dictum eget mauris sit amet pretium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis pretium purus sit amet consectetur. Integer aliquet volutpat elit nec tristique. Praesent ac ullamcorper nisl. Aliquam velit tellus, lobortis ut arcu tincidunt, tempor porttitor neque. Nulla quis mollis ligula, eu consectetur ligula."
+            },
+            {
+                title: "Praesent fringilla fermentum lacus sit amet sodales!!!",
+                content: "Praesent fringilla fermentum lacus sit amet sodales. Nunc vehicula id nisi eu sollicitudin. Praesent nec dui rutrum, ultrices nisi eget, aliquam velit. Nunc consequat condimentum ante, tempus lobortis velit rhoncus a. Proin nec interdum tortor, eget tincidunt augue. Phasellus metus nisl, aliquet sit amet arcu vel, egestas pellentesque magna. Sed arcu nulla, hendrerit malesuada ullamcorper eu, accumsan ac quam. Nunc bibendum risus sit amet diam malesuada, sed maximus metus accumsan. Pellentesque blandit aliquam eros, ut malesuada dui maximus ut. Pellentesque egestas erat nec auctor tincidunt. Aenean metus lorem, suscipit id lacinia non, eleifend ut urna. Vivamus pharetra, tortor nec vehicula mollis, ipsum leo ullamcorper nunc, nec tincidunt dui lacus eu enim. Suspendisse quis nunc ante."
+            },
+            {
+                title: "Praesent in nulla euismod?",
+                content: "Praesent in nulla euismod, blandit nisi eget, consectetur enim. Integer est mauris, imperdiet et velit et, aliquet lobortis mi. Sed mattis lacus ac nulla rutrum, in lobortis nisl blandit. Phasellus mattis lacus in est ornare congue at quis elit. Pellentesque tortor eros, sollicitudin eget commodo feugiat, aliquet et est. Morbi ac tellus urna. Donec molestie sollicitudin ipsum, nec bibendum augue sollicitudin ac. Nullam eu metus risus. Phasellus at ligula id mi finibus porttitor sed vel diam. Aenean elementum aliquet lacus, at sodales quam commodo a."
+            },
+            {
+                title: "Morbi elementum ligula ante!",
+                content: "Aenean vulputate odio et arcu scelerisque, non placerat turpis tristique. Morbi elementum ligula ante, ac venenatis lectus sollicitudin et. Morbi sollicitudin cursus ante. Fusce eget viverra nisl, ullamcorper semper augue. Nam malesuada lacus id tortor congue aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta porttitor lorem non laoreet. Ut euismod neque magna, sed varius nunc laoreet non."
+            },
+            {
+                title: "Vivamus euismod hendrerit leo?",
+                content: "Vivamus euismod hendrerit leo, elementum fringilla purus ultricies eget. Ut leo leo, accumsan eu sollicitudin sed, scelerisque mollis magna. Sed lacus nunc, congue vitae purus et, luctus tempor lectus. Integer posuere erat et ipsum commodo, nec accumsan erat pulvinar. Fusce id maximus est. Etiam aliquam orci sem, id placerat metus aliquet accumsan. Integer tristique quam euismod mauris tristique sodales."
+            },
+            {
+                title: "Donec scelerisque ullamcorper risus.",
+                content: "Donec scelerisque ullamcorper risus. Fusce magna quam, pretium eget lorem et, consequat scelerisque metus. Quisque pretium sapien a hendrerit pharetra. Nulla sit amet neque eget ipsum rutrum lobortis. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce euismod scelerisque nisl, vel semper neque viverra vel."
+            },
+            {
+                title: "Nam ac pretium dui, in porta lectus!",
+                content: "Nam ac pretium dui, in porta lectus. Aliquam erat volutpat. Curabitur purus urna, mollis vitae posuere id, tincidunt in ante. Ut scelerisque rhoncus velit at aliquet. Aenean pellentesque elit enim, eget dictum quam auctor et. Nulla quis lacus sed nisi tincidunt sodales nec eu leo. Fusce gravida arcu ut magna bibendum feugiat. Pellentesque tellus leo, pretium in accumsan sit amet, venenatis vitae eros. Nam porttitor, risus aliquam volutpat porttitor, nisl quam interdum erat, id sodales nulla odio ut est. Nullam dictum ultricies est sed vestibulum. Suspendisse porta iaculis gravida. Suspendisse dolor tortor, dapibus ac imperdiet vitae, sodales eu ante. Nullam a enim convallis, ullamcorper ex eget, pretium nisi. Etiam bibendum turpis non viverra pellentesque. Etiam pellentesque sem odio. Mauris nec iaculis urna."
+            },
+            {
+                title: "Phasellus rhoncus.",
+                content: "Nullam lobortis feugiat justo nec porttitor. Sed vel aliquam sem, ac porttitor neque. Phasellus rhoncus turpis sapien, mollis lacinia est tempor viverra. Suspendisse nisi magna, scelerisque sed tincidunt ut, varius eget arcu. Cras aliquam eros a ante faucibus, sit amet laoreet justo rutrum. Aliquam pellentesque neque eu mi dapibus, eu dictum dolor vehicula. In vitae auctor tellus, in dignissim sapien. Phasellus ac orci nisi. Mauris feugiat sapien elit, eu sagittis turpis rhoncus id."
+            }
+
+        ];
+        // конец массива новостей
+
+        //сначала выведем ровно 5 новостей
+        for (let i = 0; i < 6; i++) {
+            createNews(i);
+        };
+
+        function createNews(index) {
+            let div = document.createElement('div');
+
+            let p = document.createElement('p');
+            p.setAttribute('class', 'title');
+            p.textContent = news[index].title;
+            div.appendChild(p);
+
+            p = document.createElement('p');
+            p.setAttribute('class', 'content');
+            p.textContent = news[index].content;
+            div.appendChild(p);
+
+            wrapper.appendChild(div);
+        };
+
+        console.log(window);
+        //window.addEventListener('scroll');
+
+        let index = 6; // начнем подгружать с 6 новости
+        window.onscroll = function () {
+            if ((document.body.clientHeight === document.body.scrollHeight) && (index < news.length)) {
+                createNews(index);
+                index++;
+            }
+        }
+    </script>
+</body>
+
+</html>

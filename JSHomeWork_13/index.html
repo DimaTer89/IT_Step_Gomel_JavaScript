@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #main1 {
+            width: 35%;
+            height: 120px;
+            background-color: beige;
+        }
+
+        .slidecontainer {
+            width: 90%;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            background: grey;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            border-radius: 10px;
+            margin-left: 5%;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: darkblue;
+            cursor: pointer;
+        }
+
+        #pictureBox {
+            width: 1000px;
+            height: 800px;
+            background-color: blanchedalmond;
+        }
+
+        .arrowRight {
+            opacity: 1;
+            height: 100px;
+            width: 110px;
+            background-image: url(arrowLeft.png);
+            position: absolute;
+            top: 590px;
+            left: 890px;
+        }
+
+        .arrowLeft {
+            opacity: 1;
+            height: 100px;
+            width: 110px;
+            background-image: url(arrowRight.png);
+            position: absolute;
+            top: 590px;
+        }
+        #mainDiv{
+            margin-left:50px;
+            width: 600px;
+            text-align: left;
+            color:white;
+        }
+        #p1,#p2,#p3{
+            border:1px solid black;
+            background-color: blue;
+            border-radius:10px;
+            cursor: default;
+        }
+        #p1:hover,#p2:hover,#p3:hover{
+            opacity: 0.7;
+        }
+        #art1,#art2,#art3{
+            text-align: center;
+            border-radius: 10px;
+            border:2px solid black;
+            background-color: aqua;
+            color:black;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <hr>
+    <div id="main1">
+        <h2>Задание 1</h2>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 2</h2>
+        <div id="pictureBox">
+            <div class="arrowRight"></div>
+            <img id="imgBox" height="800px" width="1000px" alt="">
+            <div class="arrowLeft"></div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 3</h2>
+        <div id="mainDiv">
+            <div id="div1">
+                <div id="p1"><p>Рефакторинг кода</p></div>
+                <div id="art1">Что такое рефакторинг кода понять несложно – определений в сети достаточно много. Наиболее удачное
+                    и полное, на мой взгляд, в википедии, и не только потому, что оно исчерпывающее, но и потому, что в
+                    нем рефакторинг противопоставляется таким этапам жизненного цикла программных продуктов, как
+                    оптимизация и реинжиниринг. Познакомиться с этим вариантом определения легко, набрав в строке
+                    интернет поиска слово "Рефакторинг" и открыв (скорее всего первую) ссылку на сайт свободной
+                    энциклопедии.
+
+                    Итак, рефакторинг кода – это процесс внесения изменений в исходный код программы посредством
+                    небольших преобразований, смысл которых эквивалентен прежним фрагментам, но результат выглядит более
+                    стройным, органичным и логичным.</div>
+            </div>
+            <div id="div2">
+                <div id="p2"><p>XML и прикладное программирование</p></div>
+                <div id="art2">ML (eXtensible Markup Language) - это, как следует из дословного перевода, расширяемый язык
+                    разметки данных. Но не каких-то конкретных данных, а любых структурированных данных, которые можно
+                    представить в текстовом виде. Сложно оценить роль, которую XML сыграл и продолжает играть в сфере
+                    информационных технологий и, в частности, в отрасли разработки программных продуктов - она велика и
+                    даже больше, чем просто велика... Ключевое слово в его определении (аббревиатуре) – расширяемый
+                    (eXtensible), и смысл его не в том, что сам по себе XML может куда-то расширяться, а в том, что на
+                    его основе можно создавать различные расширения – специализированные языки разметки. Стандарт XML
+                    регламентирует лишь то, как должны описываться структурные элементы документа (теги) и связанные с
+                    ними атрибуты. Иными словами XML определяет обобщенный синтаксис разметки документа. </div>
+            </div>
+            <div id="div3">
+                <div id="p3"><p>Аспектно-ориентированное программирование</p></div>
+                <div id="art3">Аспектно-ориентированное программирование (АОП) – относительно новая парадигма программирования,
+                    появившаяся в начале этого тысячелетия. Пройдя по ссылке и прочитав краткий обзор на эту тему, можно
+                    долго думать и гадать, а что же такое АОП, и какие цели преследовали те самые сотрудники Xerox,
+                    которые ее разрабатывали. Обратите внимание, как заметно отличается объем статьи в Википедии, кратко
+                    повествующей об АОП от объема статьи про объектно-ориентированное программирование (ООП), концепции
+                    которого известны практически всем разработчикам программного обеспечения? Ну да, АОП, судя по
+                    тексту, призвано упростить процесс разделения целевой и второстепенной функциональности, которую
+                    здесь называют сквозной.</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let arrayPicture = [
+            {
+                src: "1.jpg"
+            },
+            {
+                src: "2.jpg"
+            },
+            {
+                src: "3.jpg"
+            },
+            {
+                src: "4.jpg"
+            },
+            {
+                src: "5.jpg"
+            },
+        ]
+        let index = 0;
+        document.querySelector("#imgBox").src = arrayPicture[index]["src"];
+        if (index == 0) document.querySelector(".arrowLeft").style.opacity = "0.1";
+        document.querySelector(".arrowRight").addEventListener("click", function () {
+            if (index < arrayPicture.length - 1) {
+                ++index;
+                document.querySelector("#imgBox").src = arrayPicture[index]["src"];
+                if (index >= arrayPicture.length - 1) {
+                    document.querySelector(".arrowRight").style.opacity = "0.1";
+                }
+                else {
+                    document.querySelector(".arrowRight").style.opacity = "1";
+                    document.querySelector(".arrowLeft").style.opacity = "1";
+                }
+
+            }
+        });
+        document.querySelector(".arrowLeft").addEventListener("click", function () {
+            if (index > 0) {
+                --index;
+                document.querySelector("#imgBox").src = arrayPicture[index]["src"];
+                if (index <= 0) {
+                    document.querySelector(".arrowLeft").style.opacity = "0.1";
+                }
+                else {
+                    document.querySelector(".arrowLeft").style.opacity = "1";
+                    document.querySelector(".arrowRight").style.opacity = "1";
+                }
+            }
+        });
+
+        let isOpen = false;
+        let currentOpen;
+        document.querySelector("#mainDiv").addEventListener("click", function(event) {
+            event.preventDefault();
+            let div = event.path[2].children[1];
+            if(!isOpen) {
+                div.style.display = "block";
+                currentOpen = div;
+                isOpen = true;
+            }
+            else {
+                if(div == currentOpen) {
+                    div.style.display = "none";
+                    currentOpen = null;
+                    isOpen = false;
+                }
+                else{
+                    currentOpen.style.display = "none";
+                    div.style.display = "block";
+                    currentOpen = div;
+                    isOpen = true;
+                }
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>

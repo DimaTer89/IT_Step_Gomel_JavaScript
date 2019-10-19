@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .calendar-container {
+            width: 30%;
+            height: 500px;
+            margin: 25px auto;
+            background-color: bisque;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .data-container {
+            margin: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .container {
+            margin: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        input {
+            width: 70%;
+            height: 20px;
+            padding: 3px;
+            border-radius: 5px;
+        }
+
+        button {
+            height: 30px;
+            padding: 3px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+        }
+
+
+        .result-containe {
+            display: none;
+            margin: 3%;
+            border: 1px solid rgb(12, 0, 66);
+            border-radius: 10px;
+            padding: 3%;
+        }
+
+        table {
+            margin: 10px;
+            width: 96%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+
+        tr {
+            height: 25px;
+        }
+
+        th {
+            text-transform: uppercase;
+            border: 1px solid #000;
+        }
+
+        td {
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar-container">
+        <div class="data-container">
+            <div class="container">
+                <div class="div-container-month">
+                    <div>
+                        <label for="month">Month: </label>
+                        <input type="text" name="month" id="month">
+                    </div>
+                    <div>
+                        <p id="danger-month" class="danger"></p>
+                    </div>
+                </div>
+                <div class="div-container-year">
+                    <label for="year">Year: </label>
+                    <input type="text" name="year" id="year">
+                    <p id="danger-year" class="danger"></p>
+                </div>
+            </div>
+            <button id="generate-calendar">Сгенерировать</button>
+        </div>
+        <div class="result-containe"></div>
+    </div>
+    <script>
+        let daysOfWeek = [
+            'mon',
+            'tue',
+            'wed',
+            'thu',
+            'fri',
+            'sut',
+            'sun'
+        ];
+
+        function clear() {
+            document.getElementById('month').value = '';
+            document.getElementById('year').value = '';
+            document.querySelector('.result-containe').style.display = 'none';
+        };
+
+        document.getElementById('generate-calendar').addEventListener('click', function () {
+            let month = document.getElementById('month').value - 1;
+            let year = document.getElementById('year').value;
+            createLabel(month, year);
+            createTable(month, year);
+
+
+        });
+
+        function createLabel(month, year) {
+            let resultContaine = document.querySelector('.result-containe');
+            resultContaine.innerHTML = '';
+            let h2 = document.createElement('h2');
+            h2.textContent = `${getMonthToString(month)}, ${year}`;
+            resultContaine.appendChild(h2);
+        };
+
+        function getMonthToString(month) {
+            switch (month) {
+                case 0:
+                    return 'January';
+                case 1:
+                    return 'February';
+                case 2:
+                    return 'March';
+                case 3:
+                    return 'April';
+                case 4:
+                    return 'May';
+                case 5:
+                    return 'June';
+                case 6:
+                    return 'July';
+                case 7:
+                    return 'August';
+                case 8:
+                    return 'September';
+                case 9:
+                    return 'October';
+                case 10:
+                    return 'November';
+                case 11:
+                    return 'December';
+                default:
+                    return '';
+            };
+        };
+
+        function createTable(month, year) {
+            let resultContaine = document.querySelector('.result-containe');
+            let table = document.createElement('table');
+
+
+            let tr = document.createElement('tr');
+            daysOfWeek.forEach(name => {
+                let th = document.createElement('th');
+                th.textContent = name;
+                tr.appendChild(th);
+            });
+            table.appendChild(tr);
+
+
+            let flag = true;
+            let day = 1;
+            let date;
+            let dayOfWeek;
+            while (flag) {
+
+                date = new Date(year, month, day);
+                dayOfWeek = date.getDay() === 0 ? 7 : date.getDay();
+
+                if (dayOfWeek === 1) {
+                    tr = document.createElement('tr');
+                    for (let i = 0; i <= 6; i++) {
+                        let td = document.createElement('td');
+                        td.textContent = flag ? (date.getDate()).toString() : '';
+                        tr.appendChild(td);
+                        day++;
+                        date = new Date(year, month, day);
+                        flag = date.getMonth() === month;
+                    };
+                    table.appendChild(tr);
+                } else {
+
+                    tr = document.createElement('tr');
+                    for (let i = 1; i < dayOfWeek; i++) {
+                        let td = document.createElement('td');
+                        td.textContent = '';
+                        tr.appendChild(td);
+                    };
+                    for (let i = dayOfWeek; i <= 7; i++) {
+                        let td = document.createElement('td');
+                        td.textContent = (date.getDate()).toString();
+                        tr.appendChild(td);
+                        day++;
+                        date = new Date(year, month, day);
+                        flag = date.getMonth() === month;
+                    };
+                    table.appendChild(tr);
+                }
+
+            };
+            resultContaine.appendChild(table);
+
+            resultContaine.style.display = 'block';
+        };
+
+        function validateMonth(month) {
+            return (((month - 1) <= 11 && (month - 1) >= 0) ? true : false);
+        };
+
+        function validateYear(year) {
+            return (year.match(/^\d{4}$/) !== null ? true : false);
+        };
+        document.querySelector("#month").addEventListener("blur", function () {
+            if (validateMonth(this.value)) {
+                document.getElementById('danger-month').textContent = '';
+                document.getElementById('generate-calendar').style.backgroundColor = 'rgb(255, 255, 255)';
+                document.getElementById('generate-calendar').style.color = 'rgb(0, 0, 0)';
+                document.getElementById('generate-calendar').removeAttribute('disabled');
+            } else {
+                document.getElementById('danger-month').textContent = 'Вы введи некорретктный месяц!';
+                document.getElementById('generate-calendar').style.backgroundColor = 'rgb(14, 23, 100)';
+                document.getElementById('generate-calendar').style.color = 'rgb(255, 255, 255)';
+                document.getElementById('generate-calendar').setAttribute('disabled', '');
+            };
+        });
+        document.querySelector("#year").addEventListener("blur", function () {
+            if (validateYear(this.value)) {
+                document.getElementById('danger-year').textContent = '';
+                document.getElementById('generate-calendar').style.backgroundColor = 'rgb(255, 255, 255)';
+                document.getElementById('generate-calendar').style.color = 'rgb(0, 0, 0)';
+                document.getElementById('generate-calendar').removeAttribute('disabled');
+            } else {
+                document.getElementById('danger-year').textContent = 'Некорретктный год (должно быть 4 цифр)!';
+                document.getElementById('generate-calendar').style.backgroundColor = 'rgb(14, 23, 100)';
+                document.getElementById('generate-calendar').style.color = 'rgb(255, 255, 255)';
+                document.getElementById('generate-calendar').setAttribute('disabled', '');
+            };
+        });
+    </script>
+</body>
+
+</html>
