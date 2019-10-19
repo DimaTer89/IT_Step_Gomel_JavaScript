@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .class1 {
+            text-decoration: none;
+        }
+
+        .class2 {
+            text-decoration: none;
+            border-bottom: 1px dashed blue;
+        }
+
+        .onelevel li {
+            list-style-type: disc;
+        }
+
+        .level li {
+            list-style-type: circle;
+        }
+
+        .onelevel label:hover {
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .c,
+        .d,
+        .e {
+            display: none;
+        }
+
+        .onelevel {
+            display: none;
+        }
+
+        label:hover {
+            font-weight: bolder;
+        }
+
+        ol li:hover {
+            cursor: default
+        }
+
+        #editText {
+            margin-left: 20px;
+            width: 400px;
+            font-size: 26px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+
+        #saveText {
+            width: 400px;
+            height: 400px;
+            display: none;
+            padding-left: 20px;
+            padding-right: 10px;
+            font-size: 24px;
+
+        }
+
+        .pClass {
+            margin-left: 20px;
+            font-size: 26px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+
+        th,
+        td {
+            border-radius: 10px;
+            font-size: 25px;
+            border: 2px solid black;
+            text-align: center;
+            cursor: default;
+            width: 150px;
+        }
+
+        th:hover {
+            background-color: aqua;
+        }
+        #changeBlock{
+            background-color: blanchedalmond;
+            font-size: 23px;
+            width: 500px;
+            height: 100px;
+            font-weight: bold;
+        }
+        #textBlock{
+            height: 70%;
+            width: 90%;
+            border:2px solid black;
+            margin:20px;
+        }
+        #block {
+            background-color: rgb(153, 194, 255);
+            min-height: 150px;
+            min-width: 500px;
+            position: relative;
+            width: 480px;
+            border: 2px solid gray;
+            margin: 10%;
+            padding: 15px;
+        }
+
+        #block_resize {
+            /* background-color: #000; */
+            bottom: 0;
+            cursor: se-resize;
+            /* smargin-top: 9px; */
+            position: absolute;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 15px solid rgb(102, 102, 102);
+            border-left: 15px solid transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <hr>
+    <div>
+        <h2>Задание 1</h2>
+        <ul>
+            <li><a href="index.html">index.html</a></li>
+            <li><a href="http://google.com">http://google.com</a></li>
+            <li><a href="http://itstep.org">http://itstep.org</a></li>
+            <li><a href="http://mystat.itstep.org">http://mystat.itstep.org</a></li>
+            <li><a href="images/cat.jpg">images/cat.jpg</a></li>
+        </ul>
+    </div>
+    <hr>
+    <hr>
+    <div>
+        <h2>Задание 2</h2>
+        <div>
+            <label id="mainFolder">This PC</label>
+            <div class="onelevel">
+                <ul>
+                    <li id="c"><label>Local Disc C:</label>
+                        <div class="level c">
+                            <ul>
+                                <li>Program Files</li>
+                                <li>Users</li>
+                                <li>Windows</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="d"><label>Local Disc D:</label>
+                        <div class="level d">
+                            <ul>
+                                <li>New Folder 1</li>
+                                <li>New Folder 2</li>
+                                <li>New Folder 3</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="e"><label>Local Disc E:</label>
+                        <div class="level e"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 3</h2>
+        <div>
+            <ol>
+                <li id="l1">"JavaScript for Kids: A Playfuk Introduction to Programming" by Nick Morgan</li>
+                <li id="l2">"Eloquent JavaScript: A Modern Introduction to Programming" by Marijn Haverbeke</li>
+                <li id="l3">"JavaScript: The Good Parts" by Douglas Crockford</li>
+                <li id="l4">"Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns
+                    JS Libraries" by Eric Elliot</li>
+                <li id="l5">"Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript" by David Herman
+                </li>
+                <li id="l6">JavaScript The Definitive Guide" by David Flanagan</li>
+                <li id="l7">"You Don't Know JS" by Kyle Simpson</li>
+            </ol>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 4</h2>
+        <p class="pClass">Press Ctrl+E to edit text</p>
+        <p class="pClass">Press Ctrl+S to save text</p>
+        <div id="editText">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent aliquam, justo convallis
+luctus rutrum, erat nulla fermentum diam, at nonummy quam ante ac quam. Maecenas urna purus, fermentum id,
+molestie in, commodo porttitor, felis. Nam blandit quam ut lacus. Quisque ornare risus quis ligula.
+Phasellus tristique purus a augue condimentum adipiscing. Aenean sagittis. Etiam leo pede, rhoncus
+venenatis, tristique in, vulputate at, odio. Donec et ipsum et sapien vehicula nonummy. Suspendisse potenti.
+Fusce varius urna id quam. Sed neque mi, varius eget, tincidunt nec, suscipit id, libero. In eget purus.
+Vestibulum ut nisl. Donec eu mi sed turpis feugiat feugiat. Integer turpis arcu, pellentesque eget, cursus
+et, fermentum ut, sapien. Fusce metus mi, eleifend sollicitudin, molestie id, varius et, nibh. Donec nec
+libero.</div>
+        <textarea id="saveText"></textarea>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 5</h2>
+        <table>
+            <tr>
+                <th id="Firstname">Firstname</th>
+                <th id="Lastname">Lastname</th>
+                <th id="Age">Age</th>
+                <th id="Company">Company</th>
+            </tr>
+            <tr>
+                <td>Mark</td>
+                <td>Zukenberg</td>
+                <td>34</td>
+                <td>Facebook</td>
+            </tr>
+            <tr>
+                <td>Larry</td>
+                <td>Page</td>
+                <td>45</td>
+                <td>Google</td>
+            </tr>
+            <tr>
+                <td>Timothy</td>
+                <td>Cook</td>
+                <td>57</td>
+                <td>Apple</td>
+            </tr>
+            <tr>
+                <td>Bill</td>
+                <td>Gates</td>
+                <td>62</td>
+                <td>Microsoft</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Задание 6</h2>
+        <div id="block">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda recusandae hic quod, ullam minus sunt.
+            </p>
+            <div id="block_resize"></div>
+        </div>
+    </div>
+    <script>
+        let allPath = document.querySelectorAll("a");
+        for (let i = 0; i < allPath.length; ++i) {
+            let string = allPath[i].innerText.split('//');
+            if (string[0] == "http:") allPath[i].className = "class2";
+            else allPath[i].className = "class1";
+        }
+
+        document.querySelector("#mainFolder").addEventListener("click", () => {
+            let div = document.querySelector(".onelevel");
+            if (div.style.display == "none") div.style.display = "block";
+            else div.style.display = "none";
+        });
+        document.querySelector("#c").addEventListener("click", () => {
+            let div = document.querySelector(".c");
+            if (div.style.display == "none") div.style.display = "block";
+            else div.style.display = "none";
+        });
+        document.querySelector("#d").addEventListener("click", () => {
+            let div = document.querySelector(".d");
+            if (div.style.display == "none") div.style.display = "block";
+            else div.style.display = "none";
+        });
+        document.querySelector("#e").addEventListener("click", () => {
+            let div = document.querySelector(".e");
+            if (div.style.display == "none") div.style.display = "block";
+            else div.style.display = "none";
+        });
+
+        let flag = false;
+        let lastPath = [];
+        document.querySelector("ol").addEventListener("click", function (event) {
+            if (event.shiftKey) {
+                let eventPointer = +event.path[0].id[event.path[0].id.length - 1];
+                let pathPointer = +lastPath[lastPath.length - 1].id[lastPath[lastPath.length - 1].id.length - 1];
+                console.log(`${eventPointer} - ${typeof (eventPointer)}`);
+                console.log(`${pathPointer} - ${typeof (pathPointer)}`);
+                if (eventPointer > pathPointer) {
+                    for (eventPointer; eventPointer > pathPointer; eventPointer--) {
+                        lastPath.push(document.querySelector("#l" + eventPointer));
+                        document.querySelector("#l" + eventPointer).style.backgroundColor = "orange";
+                    }
+                }
+                else {
+                    for (eventPointer; eventPointer <= pathPointer; eventPointer++) {
+                        lastPath.push(document.querySelector("#l" + eventPointer));
+                        document.querySelector("#l" + eventPointer).style.backgroundColor = "orange";
+                    }
+                }
+            }
+            if (flag && !event.ctrlKey && !event.shiftKey) {
+                if (lastPath.length >= 1) {
+                    lastPath.forEach(function (value, index) { value.style.backgroundColor = "white" });
+                    lastPath.splice(0, lastPath.length);
+                    flag = false;
+                }
+                
+            }
+            if (lastPath.length >= 1 && !event.shiftKey) {
+                if (event.ctrlKey) {
+                    if (lastPath.includes(event.path[0])) {
+                        lastPath.find(function (value, index) { if (value == event.path[0]) return value }).style.backgroundColor = "white";
+                        lastPath.splice(lastPath.indexOf(event.path[0]), 1);
+                    }
+                    else {
+                        event.path[0].style.backgroundColor = "orange";
+                        lastPath.push(event.path[0]);
+                    }
+                    flag = false;
+                }
+                else {
+                    lastPath.forEach(function (value, index) { value.style.backgroundColor = "white" });
+                    lastPath.splice(0, lastPath.length);
+                    lastPath.push(event.path[0]);
+                    event.path[0].style.backgroundColor = "orange";
+                    flag = true;
+                }
+            }
+            else {
+                event.path[0].style.backgroundColor = "orange";
+                lastPath.push(event.path[0]);
+                flag = true;
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.code == "KeyE" && event.ctrlKey) {
+                event.preventDefault();
+                let text = document.querySelector("#editText").innerHTML;
+                document.querySelector("#editText").style.display = "none";
+                document.querySelector("#saveText").innerHTML = text;
+                document.querySelector("#saveText").style.display = "block";
+            }
+            if (event.code == "KeyS" && event.ctrlKey) {
+                event.preventDefault();
+                let text = document.querySelector("#saveText").value;
+                document.querySelector("#saveText").style.display = "none";
+                document.querySelector("#editText").innerHTML = text;
+                document.querySelector("#editText").style.display = "block";
+
+            }
+        })
+
+        let peopleArr = [];
+        let table = document.querySelector("table");
+        for (let i = 1; i < table.children[0].children.length; i++) {
+            peopleArr.push({
+                firstname: table.children[0].children[i].children[0].innerText,
+                lastname: table.children[0].children[i].children[1].innerText,
+                age: +table.children[0].children[i].children[2].innerText,
+                company: table.children[0].children[i].children[3].innerText
+            });
+        }
+        document.querySelector("table").addEventListener("click", function (event) {
+            console.dir(peopleArr);
+            let condition = event.path[0].id;
+            switch (condition) {
+                case "Firstname":
+                    peopleArr.sort((people1, people2) => (people1.firstname > people2.firstname) ? 1 : (people1.firstname < people2.firstname) ? -1 : 0);
+                    for (let i = 1; i < table.children[0].children.length; i++) {
+                        table.children[0].children[i].children[0].innerText = peopleArr[i-1]["firstname"];
+                        table.children[0].children[i].children[1].innerText = peopleArr[i-1]["lastname"];
+                        table.children[0].children[i].children[2].innerText = peopleArr[i-1]["age"];
+                        table.children[0].children[i].children[3].innerText = peopleArr[i-1]["company"];
+                    }
+                    break;
+                case "Lastname":  
+                    peopleArr.sort((people1, people2) => (people1.lastname > people2.lastname) ? 1 : (people1.lastname < people2.lastname) ? -1 : 0);
+                    for (let i = 1; i < table.children[0].children.length; i++) {
+                        table.children[0].children[i].children[0].innerText = peopleArr[i-1]["firstname"];
+                        table.children[0].children[i].children[1].innerText = peopleArr[i-1]["lastname"];
+                        table.children[0].children[i].children[2].innerText = peopleArr[i-1]["age"];
+                        table.children[0].children[i].children[3].innerText = peopleArr[i-1]["company"];
+                    }
+                    break;  
+                case "Age": 
+                    peopleArr.sort((people1, people2) => (people1.age > people2.age) ? 1 : (people1.age < people2.age) ? -1 : 0);
+                    for (let i = 1; i < table.children[0].children.length; i++) {
+                        table.children[0].children[i].children[0].innerText = peopleArr[i-1]["firstname"];
+                        table.children[0].children[i].children[1].innerText = peopleArr[i-1]["lastname"];
+                        table.children[0].children[i].children[2].innerText = peopleArr[i-1]["age"];
+                        table.children[0].children[i].children[3].innerText = peopleArr[i-1]["company"];
+                    }
+                    break;   
+                case "Company":
+                    peopleArr.sort((people1, people2) => (people1.company > people2.company) ? 1 : (people1.company < people2.company) ? -1 : 0);
+                    for (let i = 1; i < table.children[0].children.length; i++) {
+                        table.children[0].children[i].children[0].innerText = peopleArr[i-1]["firstname"];
+                        table.children[0].children[i].children[1].innerText = peopleArr[i-1]["lastname"];
+                        table.children[0].children[i].children[2].innerText = peopleArr[i-1]["age"];
+                        table.children[0].children[i].children[3].innerText = peopleArr[i-1]["company"];
+                    }
+                    break; 
+                default : 
+                alert("ERROR!!!");
+                break;      
+            }
+        });
+
+        let ie = 0;
+        let op = 0;
+        let ff = 0;
+        let block; 
+        let block_r; 
+        let delta_w = 0; 
+        let delta_h = 0; 
+        onload = function () {
+            let browser = navigator.userAgent;
+            if (browser.indexOf("Opera") != -1) op = 1;
+            else {
+                if (browser.indexOf("MSIE") != -1) ie = 1;
+                else {
+                    if (browser.indexOf("Firefox") != -1) ff = 1;
+                }
+            }
+            block = document.getElementById("block"); 
+            block_r = document.getElementById("block_resize"); 
+            document.onmouseup = clearXY; 
+            block_r.onmousedown = saveWH; 
+        }
+        function getXY(obj_event) {
+            if (obj_event) {
+                x = obj_event.pageX;
+                y = obj_event.pageY;
+            } else {
+                x = window.event.clientX;
+                y = window.event.clientY;
+                if (ie) {
+                    y -= 2;
+                    x -= 2;
+                }
+            }
+            return new Array(x, y);
+        }
+        function saveWH(obj_event) {
+            let point = getXY(obj_event);
+            w_block = block.clientWidth; 
+            h_block = block.clientHeight; 
+            delta_w = w_block - point[0]; 
+            delta_h = h_block - point[1]; 
+            document.onmousemove = resizeBlock;
+            if (op || ff) document.addEventListener("onmousemove", resizeBlock, false);
+            return false; 
+        }
+        function clientWidth() {
+            return document.documentElement.clientWidth == 0 ? document.body.clientWidth : document.documentElement
+                .clientWidth;
+        }
+        function clientHeight() {
+            return document.documentElement.clientHeight == 0 ? document.body.clientHeight : document.documentElement
+                .clientHeight;
+        }
+        function clearXY() {
+            document.onmousemove = null;
+        }
+        function resizeBlock(obj_event) {
+            let point = getXY(obj_event);
+            new_w = delta_w + point[0]; 
+            new_h = delta_h + point[1]; 
+            block.style.width = new_w + "px";
+            block.style.height = new_h + "px";
+            if (block.offsetLeft + block.clientWidth > clientWidth()) block.style.width = (clientWidth() - block
+                .offsetLeft) + "px";
+            if (block.offsetTop + block.clientHeight > clientHeight()) block.style.height = (clientHeight() - block
+                .offsetTop) + "px";
+        }
+    </script>
+</body>
+
+</html>
